@@ -1616,200 +1616,200 @@ namespace EASM {
     scalar uuid extends string;
 
     enum AssetUpdateTransfers {
-        as,
-        contact,
-        domain,
-        host,
-        ipAddress,
-        ipBlock,
-        page,
-        sslCert,
+        As: "as",
+        Contact: "contact",
+        Domain: "domain",
+        Host: "host",
+        IpAddress: "ipAddress",
+        IpBlock: "ipBlock",
+        Page: "page",
+        SslCert: "sslCert",
     }
 
     enum ReportBillableAssetBreakdownKind {
-        domain,
-        host,
-        ipAddress,
+        Domain: "domain",
+        Host: "host",
+        IpAddress: "ipAddress",
     }
 
     enum ObservationSeverity {
-        high,
-        medium,
-        low,
-        none,
+        High: "high",
+        Medium: "medium",
+        Low: "low",
+        None: "none",
     }
 
     enum TaskState {
-        pending,
-        running,
-        paused,
-        complete,
-        incomplete,
-        failed,
-        warning,
+        Pending: "pending",
+        Running: "running",
+        Paused: "paused",
+        Complete: "complete",
+        Incomplete: "incomplete",
+        Failed: "failed",
+        Warning: "warning",
     }
 
     enum TaskPhase {
-        running,
-        polling,
-        complete,
+        Running: "running",
+        Polling: "polling",
+        Complete: "complete",
     }
 
     enum DataConnectionKind {
-        logAnalytics,
-        azureDataExplorer,
+        LogAnalytics:"logAnalytics",
+        AzureDataExplorer: "azureDataExplorer",
     }
 
     enum ObservationType {
-        cve,
-        insight,
+        Cve: "cve",
+        Insight: "insight",
     }
 
     enum DataConnectionFrequency {
-        daily,
-        weekly,
-        monthly,
+        Daily: "daily",
+        Weekly: "weekly",
+        Monthly: "monthly",
     }
 
     enum AssetKind {
-        as,
-        contact,
-        domain,
-        host,
-        ipAddress,
-        ipBlock,
-        page,
-        sslCert,
+        As: "as",
+        Contact: "contact",
+        Domain: "domain",
+        Host: "host",
+        IpAddress: "ipAddress",
+        IpBlock: "ipBlock",
+        Page: "page",
+        SslCert: "sslCert",
     }
 
     enum DiscoRunState {
-        pending,
-        running,
-        completed,
-        failed,
+        Pending: "pending",
+        Running: "running",
+        Completed: "completed",
+        Failed: "failed",
     }
 
     enum DataConnectionContent {
-        assets,
-        attackSurfaceInsights,
+        Assets: "assets",
+        AttackSurfaceInsights: "attackSurfaceInsights",
     }
 
     enum DiscoSourceKind {
-        as,
-        attribute,
-        contact,
-        domain,
-        host,
-        ipBlock,
+        As: "as",
+        Attribute: "attribute",
+        Contact: "contact",
+        Domain: "domain",
+        Host: "host",
+        IpBlock: "ipBlock",
     }
 
     enum ObservedPortStateValue {
-        open,
-        closed,
-        filtered,
+        Open: "open",
+        Closed: "closed",
+        Filtered: "filtered",
     }
 
     enum AssetUpdateState {
-        candidate,
-        confirmed,
-        dismissed,
-        candidateInvestigate,
-        associatedPartner,
-        associatedThirdparty,
+        Candidate: "candidate",
+        Confirmed: "confirmed",
+        Dismissed: "dismissed",
+        CandidateInvestigate: "candidateInvestigate",
+        AssociatedPartner: "associatedPartner",
+        AssociatedThirdparty: "associatedThirdparty",
     }
 
     enum AssetState {
-        candidate,
-        confirmed,
-        dismissed,
-        candidateInvestigate,
-        associatedPartner,
-        associatedThirdparty,
-        archived,
+        Candidate: "candidate",
+        Confirmed: "confirmed",
+        Dismissed: "dismissed",
+        CandidateInvestigate: "candidateInvestigate",
+        AssociatedPartner: "associatedPartner",
+        AssociatedThirdparty: "associatedThirdparty",
+        Archived: "archived",
     }
 
     enum AuditTrailItemKind {
-        as,
-        contact,
-        domain,
-        host,
-        ipAddress,
-        ipBlock,
-        page,
-        sslCert,
+        As: "as",
+        Contact: "contact",
+        Domain: "domain",
+        Host: "host",
+        IpAdress: "ipAddress",
+        IpBlock: "ipBlock",
+        Page: "page",
+        SslCert: "sslCert",
     }
 
     enum PageAssetRedirectType {
-        httpHeader,
-        metaRefresh,
-        javascript,
-        final,
+        HttpHeader: "httpHeader",
+        MetaRefresh: "metaRefresh",
+        Javascript: "javascript",
+        Final: "final",
     }
 
     enum SslCertAssetValidationType {
-        domainValidation,
-        organizationValidation,
-        extendedValidation,
+        DomainValidation:"domainValidation",
+        OrganizationValidation:"organizationValidation",
+        ExtendedValidation:"extendedValidation",
     }
 
     model AsAssetResponse extends AssetResponse {
-        kind: AssetKind.as;
+        kind: AssetKind.As;
         asset: AsAsset;
     }
 
     model ContactAssetResponse extends AssetResponse {
-        kind: AssetKind.contact;
+        kind: AssetKind.Contact;
         asset: ContactAsset;
     }
 
     model DomainAssetResponse extends AssetResponse {
-        kind: AssetKind.domain;
+        kind: AssetKind.Domain;
         asset: DomainAsset;
     }
 
     model HostAssetResponse extends AssetResponse {
-        kind: AssetKind.host;
+        kind: AssetKind.Host;
         asset: HostAsset;
     }
 
     model IpAddressAssetResponse extends AssetResponse {
-        kind: AssetKind.ipAddress;
+        kind: AssetKind.IpAddress;
         asset: IpAddressAsset;
     }
 
     model IpBlockAssetResponse extends AssetResponse {
-        kind: AssetKind.ipBlock;
+        kind: AssetKind.IpBlock;
         asset: IpBlockAsset;
     }
 
     model PageAssetResponse extends AssetResponse {
-        kind: AssetKind.page;
+        kind: AssetKind.Page;
         asset: PageAsset;
     }
 
     model SslCertAssetResponse extends AssetResponse {
-        kind: AssetKind.sslCert;
+        kind: AssetKind.SslCert;
         asset: SslCertAsset;
     }
 
     model LogAnalyticsDataConnectionResponse extends DataConnectionResponse {
-        kind: DataConnectionKind.logAnalytics;
+        kind: DataConnectionKind.LogAnalytics;
         properties: LogAnalyticsDataConnectionProperties;
     }
 
     model AzureDataExplorerDataConnectionResponse
         extends DataConnectionResponse {
-        kind: DataConnectionKind.azureDataExplorer;
+        kind: DataConnectionKind.AzureDataExplorer;
         properties: AzureDataExplorerDataConnectionProperties;
     }
 
     model LogAnalyticsDataConnectionRequest extends DataConnectionRequest {
-        kind: DataConnectionKind.logAnalytics;
+        kind: DataConnectionKind.LogAnalytics;
         properties: LogAnalyticsDataConnectionProperties;
     }
 
     model AzureDataExplorerDataConnectionRequest extends DataConnectionRequest {
-        kind: DataConnectionKind.azureDataExplorer;
+        kind: DataConnectionKind.AzureDataExplorer;
         properties: AzureDataExplorerDataConnectionProperties;
     }
 

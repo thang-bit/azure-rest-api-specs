@@ -2,7 +2,7 @@ parameters:
   "python-sdk-folder":
     default: "C:/Users/thangle/git/azure-sdk-for-python/"
   "service-directory-name":
-    default: "riskiq"
+    default: "easm"
 
 emit: [
   "@azure-tools/typespec-python",
@@ -12,5 +12,5 @@ emit: [
 options:
   "@azure-tools/typespec-python":
     "package-mode": "dataplane"
-    "package-name": "easm"
-    "emitter-output-dir": "python-sdk-folder/sdk/easm/"
+    "package-name": "azure-defender-easm"
+    "emitter-output-dir": "{python-sdk-folder}/sdk/{service-directory-name}/{package-name}"

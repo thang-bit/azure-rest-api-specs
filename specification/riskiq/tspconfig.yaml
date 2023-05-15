@@ -1,6 +1,6 @@
 parameters:
   "python-sdk-folder":
-    default: "C:/Users/thangle/git/azure-sdk-for-python/"
+    default: "{cwd}/azure-sdk-for-python/"
   "service-directory-name":
     default: "easm"
 

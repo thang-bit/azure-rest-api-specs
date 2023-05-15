@@ -5,8 +5,7 @@ parameters:
     default: "easm"
 
 emit: [
-  "@azure-tools/typespec-python",
-  '@typespec/openapi3'
+  "@azure-tools/typespec-python"
 ]
 
 options:

@@ -1,4 +1,5 @@
 import "@typespec/rest";
+import "@typespec/openapi3";
 using TypeSpec.Http;
 
 @useAuth(azure_auth<[ImplicitFlow]>)

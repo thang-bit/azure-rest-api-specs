@@ -1,0 +1,16 @@
+parameters:
+  "python-sdk-folder":
+    default: "{cwd}/azure-sdk-for-python/"
+  "service-directory-name":
+    default: "easm"
+
+emit: [
+  "@azure-tools/typespec-python",
+  "@typespec/openapi3"
+]
+
+options:
+  "@azure-tools/typespec-python":
+    "package-mode": "dataplane"
+    "package-name": "azure-defender-easm"
+    "emitter-output-dir": "{python-sdk-folder}/sdk/{service-directory-name}/{package-name}"

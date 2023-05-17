@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "type": "module",
   "dependencies": {
+    "@azure-tools/typespec-java": "^0.7.0",
     "@azure-tools/typespec-python": "^0.8.5",
     "@typespec/compiler": "latest",
     "@typespec/openapi3": "latest",

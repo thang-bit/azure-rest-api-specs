@@ -11,9 +11,7 @@ using TypeSpec.Http;
     "{endpoint}",
     "",
     {
-        @doc("""
-    Supported Defender EASM endpoints (for example: https://east.easm.defender.microsoft.com)
-""")
+        @doc("Supported Defender EASM endpoints (for example: https://east.easm.defender.microsoft.com)")
         endpoint: string,
     }
 )

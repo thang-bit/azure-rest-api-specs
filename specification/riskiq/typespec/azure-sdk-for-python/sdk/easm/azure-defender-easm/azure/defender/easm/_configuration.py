@@ -6,7 +6,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
-from typing import Any, Optional, TYPE_CHECKING
+from typing import Any, TYPE_CHECKING
 
 from azure.core.configuration import Configuration
 from azure.core.pipeline import policies
@@ -24,26 +24,27 @@ class EASMClientConfiguration(Configuration):  # pylint: disable=too-many-instan
     Note that all parameters used to create this instance are saved as instance
     attributes.
 
+    :param endpoint: Supported Defender EASM endpoints (for example:
+     https://east.easm.defender.microsoft.com). Required.
+    :type endpoint: str
     :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials.TokenCredential
     :param apiversion: Required.
     :type apiversion: str
-    :param region: Default value is None.
-    :type region: str
     """
 
-    def __init__(
-        self, credential: "TokenCredential", apiversion: str, region: Optional[str] = None, **kwargs: Any
-    ) -> None:
+    def __init__(self, endpoint: str, credential: "TokenCredential", apiversion: str, **kwargs: Any) -> None:
         super(EASMClientConfiguration, self).__init__(**kwargs)
+        if endpoint is None:
+            raise ValueError("Parameter 'endpoint' must not be None.")
         if credential is None:
             raise ValueError("Parameter 'credential' must not be None.")
         if apiversion is None:
             raise ValueError("Parameter 'apiversion' must not be None.")
 
+        self.endpoint = endpoint
         self.credential = credential
         self.apiversion = apiversion
-        self.region = region
         self.credential_scopes = kwargs.pop("credential_scopes", ["user_impersonation"])
         kwargs.setdefault("sdk_moniker", "defender-easm/{}".format(VERSION))
         self._configure(**kwargs)

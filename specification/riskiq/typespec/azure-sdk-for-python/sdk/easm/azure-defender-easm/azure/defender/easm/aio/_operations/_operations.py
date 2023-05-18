@@ -133,7 +133,7 @@ class EASMClientOperationsMixin(EASMClientMixinABC):  # pylint: disable=too-many
             params=_params,
         )
         path_format_arguments = {
-            "region": self._serialize.url("self._config.region", self._config.region, "str", skip_quote=True),
+            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str", skip_quote=True),
         }
         request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -327,7 +327,7 @@ class EASMClientOperationsMixin(EASMClientMixinABC):  # pylint: disable=too-many
             params=_params,
         )
         path_format_arguments = {
-            "region": self._serialize.url("self._config.region", self._config.region, "str", skip_quote=True),
+            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str", skip_quote=True),
         }
         request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -396,7 +396,7 @@ class EASMClientOperationsMixin(EASMClientMixinABC):  # pylint: disable=too-many
             params=_params,
         )
         path_format_arguments = {
-            "region": self._serialize.url("self._config.region", self._config.region, "str", skip_quote=True),
+            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str", skip_quote=True),
         }
         request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -476,7 +476,7 @@ class EASMClientOperationsMixin(EASMClientMixinABC):  # pylint: disable=too-many
             params=_params,
         )
         path_format_arguments = {
-            "region": self._serialize.url("self._config.region", self._config.region, "str", skip_quote=True),
+            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str", skip_quote=True),
         }
         request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -656,7 +656,7 @@ class EASMClientOperationsMixin(EASMClientMixinABC):  # pylint: disable=too-many
             params=_params,
         )
         path_format_arguments = {
-            "region": self._serialize.url("self._config.region", self._config.region, "str", skip_quote=True),
+            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str", skip_quote=True),
         }
         request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -730,7 +730,7 @@ class EASMClientOperationsMixin(EASMClientMixinABC):  # pylint: disable=too-many
             params=_params,
         )
         path_format_arguments = {
-            "region": self._serialize.url("self._config.region", self._config.region, "str", skip_quote=True),
+            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str", skip_quote=True),
         }
         request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -923,7 +923,7 @@ class EASMClientOperationsMixin(EASMClientMixinABC):  # pylint: disable=too-many
             params=_params,
         )
         path_format_arguments = {
-            "region": self._serialize.url("self._config.region", self._config.region, "str", skip_quote=True),
+            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str", skip_quote=True),
         }
         request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -997,7 +997,7 @@ class EASMClientOperationsMixin(EASMClientMixinABC):  # pylint: disable=too-many
             params=_params,
         )
         path_format_arguments = {
-            "region": self._serialize.url("self._config.region", self._config.region, "str", skip_quote=True),
+            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str", skip_quote=True),
         }
         request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -1073,7 +1073,7 @@ class EASMClientOperationsMixin(EASMClientMixinABC):  # pylint: disable=too-many
             params=_params,
         )
         path_format_arguments = {
-            "region": self._serialize.url("self._config.region", self._config.region, "str", skip_quote=True),
+            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str", skip_quote=True),
         }
         request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -1266,7 +1266,7 @@ class EASMClientOperationsMixin(EASMClientMixinABC):  # pylint: disable=too-many
             params=_params,
         )
         path_format_arguments = {
-            "region": self._serialize.url("self._config.region", self._config.region, "str", skip_quote=True),
+            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str", skip_quote=True),
         }
         request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -1335,7 +1335,7 @@ class EASMClientOperationsMixin(EASMClientMixinABC):  # pylint: disable=too-many
             params=_params,
         )
         path_format_arguments = {
-            "region": self._serialize.url("self._config.region", self._config.region, "str", skip_quote=True),
+            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str", skip_quote=True),
         }
         request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -1528,7 +1528,7 @@ class EASMClientOperationsMixin(EASMClientMixinABC):  # pylint: disable=too-many
             params=_params,
         )
         path_format_arguments = {
-            "region": self._serialize.url("self._config.region", self._config.region, "str", skip_quote=True),
+            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str", skip_quote=True),
         }
         request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -1597,7 +1597,7 @@ class EASMClientOperationsMixin(EASMClientMixinABC):  # pylint: disable=too-many
             params=_params,
         )
         path_format_arguments = {
-            "region": self._serialize.url("self._config.region", self._config.region, "str", skip_quote=True),
+            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str", skip_quote=True),
         }
         request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -1677,7 +1677,7 @@ class EASMClientOperationsMixin(EASMClientMixinABC):  # pylint: disable=too-many
             params=_params,
         )
         path_format_arguments = {
-            "region": self._serialize.url("self._config.region", self._config.region, "str", skip_quote=True),
+            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str", skip_quote=True),
         }
         request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -1761,7 +1761,7 @@ class EASMClientOperationsMixin(EASMClientMixinABC):  # pylint: disable=too-many
             params=_params,
         )
         path_format_arguments = {
-            "region": self._serialize.url("self._config.region", self._config.region, "str", skip_quote=True),
+            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str", skip_quote=True),
         }
         request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -1830,7 +1830,7 @@ class EASMClientOperationsMixin(EASMClientMixinABC):  # pylint: disable=too-many
             params=_params,
         )
         path_format_arguments = {
-            "region": self._serialize.url("self._config.region", self._config.region, "str", skip_quote=True),
+            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str", skip_quote=True),
         }
         request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -1897,7 +1897,7 @@ class EASMClientOperationsMixin(EASMClientMixinABC):  # pylint: disable=too-many
             params=_params,
         )
         path_format_arguments = {
-            "region": self._serialize.url("self._config.region", self._config.region, "str", skip_quote=True),
+            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str", skip_quote=True),
         }
         request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -2082,7 +2082,7 @@ class EASMClientOperationsMixin(EASMClientMixinABC):  # pylint: disable=too-many
             params=_params,
         )
         path_format_arguments = {
-            "region": self._serialize.url("self._config.region", self._config.region, "str", skip_quote=True),
+            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str", skip_quote=True),
         }
         request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -2264,7 +2264,7 @@ class EASMClientOperationsMixin(EASMClientMixinABC):  # pylint: disable=too-many
             params=_params,
         )
         path_format_arguments = {
-            "region": self._serialize.url("self._config.region", self._config.region, "str", skip_quote=True),
+            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str", skip_quote=True),
         }
         request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -2449,7 +2449,7 @@ class EASMClientOperationsMixin(EASMClientMixinABC):  # pylint: disable=too-many
             params=_params,
         )
         path_format_arguments = {
-            "region": self._serialize.url("self._config.region", self._config.region, "str", skip_quote=True),
+            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str", skip_quote=True),
         }
         request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -2532,7 +2532,7 @@ class EASMClientOperationsMixin(EASMClientMixinABC):  # pylint: disable=too-many
             params=_params,
         )
         path_format_arguments = {
-            "region": self._serialize.url("self._config.region", self._config.region, "str", skip_quote=True),
+            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str", skip_quote=True),
         }
         request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -2601,7 +2601,7 @@ class EASMClientOperationsMixin(EASMClientMixinABC):  # pylint: disable=too-many
             params=_params,
         )
         path_format_arguments = {
-            "region": self._serialize.url("self._config.region", self._config.region, "str", skip_quote=True),
+            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str", skip_quote=True),
         }
         request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -2794,7 +2794,7 @@ class EASMClientOperationsMixin(EASMClientMixinABC):  # pylint: disable=too-many
             params=_params,
         )
         path_format_arguments = {
-            "region": self._serialize.url("self._config.region", self._config.region, "str", skip_quote=True),
+            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str", skip_quote=True),
         }
         request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -2863,7 +2863,7 @@ class EASMClientOperationsMixin(EASMClientMixinABC):  # pylint: disable=too-many
             params=_params,
         )
         path_format_arguments = {
-            "region": self._serialize.url("self._config.region", self._config.region, "str", skip_quote=True),
+            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str", skip_quote=True),
         }
         request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -2943,7 +2943,7 @@ class EASMClientOperationsMixin(EASMClientMixinABC):  # pylint: disable=too-many
             params=_params,
         )
         path_format_arguments = {
-            "region": self._serialize.url("self._config.region", self._config.region, "str", skip_quote=True),
+            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str", skip_quote=True),
         }
         request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -3012,7 +3012,7 @@ class EASMClientOperationsMixin(EASMClientMixinABC):  # pylint: disable=too-many
             params=_params,
         )
         path_format_arguments = {
-            "region": self._serialize.url("self._config.region", self._config.region, "str", skip_quote=True),
+            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str", skip_quote=True),
         }
         request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -3081,7 +3081,7 @@ class EASMClientOperationsMixin(EASMClientMixinABC):  # pylint: disable=too-many
             params=_params,
         )
         path_format_arguments = {
-            "region": self._serialize.url("self._config.region", self._config.region, "str", skip_quote=True),
+            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str", skip_quote=True),
         }
         request.url = self._client.format_url(request.url, **path_format_arguments)
 

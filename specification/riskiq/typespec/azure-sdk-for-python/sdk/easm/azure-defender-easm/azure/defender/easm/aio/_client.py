@@ -7,7 +7,7 @@
 # --------------------------------------------------------------------------
 
 from copy import deepcopy
-from typing import Any, Awaitable, Optional, TYPE_CHECKING
+from typing import Any, Awaitable, TYPE_CHECKING
 
 from azure.core import AsyncPipelineClient
 from azure.core.rest import AsyncHttpResponse, HttpRequest
@@ -28,19 +28,20 @@ class EASMClient(EASMClientOperationsMixin):  # pylint: disable=client-accepts-a
     view and prioritize external risk. The EASM REST API enables you to develop clients that
     integrate with your application.
 
+    :param endpoint: Supported Defender EASM endpoints (for example:
+     https://east.easm.defender.microsoft.com). Required.
+    :type endpoint: str
     :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials_async.AsyncTokenCredential
     :param apiversion: Required.
     :type apiversion: str
-    :param region: Default value is None.
-    :type region: str
     """
 
-    def __init__(
-        self, credential: "AsyncTokenCredential", apiversion: str, region: Optional[str] = None, **kwargs: Any
-    ) -> None:
-        _endpoint = "https://{region}.easm.defender.microsoft.com"
-        self._config = EASMClientConfiguration(credential=credential, apiversion=apiversion, region=region, **kwargs)
+    def __init__(self, endpoint: str, credential: "AsyncTokenCredential", apiversion: str, **kwargs: Any) -> None:
+        _endpoint = "{endpoint}"
+        self._config = EASMClientConfiguration(
+            endpoint=endpoint, credential=credential, apiversion=apiversion, **kwargs
+        )
         self._client: AsyncPipelineClient = AsyncPipelineClient(base_url=_endpoint, config=self._config, **kwargs)
 
         self._serialize = Serializer()
@@ -67,7 +68,7 @@ class EASMClient(EASMClientOperationsMixin):  # pylint: disable=client-accepts-a
 
         request_copy = deepcopy(request)
         path_format_arguments = {
-            "region": self._serialize.url("self._config.region", self._config.region, "str", skip_quote=True),
+            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str", skip_quote=True),
         }
 
         request_copy.url = self._client.format_url(request_copy.url, **path_format_arguments)

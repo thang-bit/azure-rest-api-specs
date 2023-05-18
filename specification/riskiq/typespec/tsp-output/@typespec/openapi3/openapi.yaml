@@ -4672,8 +4672,11 @@ components:
             user_impersonation: ''
       description: Azure Active Directory OAuth2 Flow
 servers:
-  - url: https://{region}.easm.defender.microsoft.com
+  - url: '{endpoint}'
     description: ''
     variables:
-      region:
-        default: eastus
+      endpoint:
+        default: ''
+        description: >-
+          Supported Defender EASM endpoints (for example:
+          https://east.easm.defender.microsoft.com)

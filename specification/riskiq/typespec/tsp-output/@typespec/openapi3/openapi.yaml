@@ -1,0 +1,4679 @@
+openapi: 3.0.0
+info:
+  title: Defender EASM
+  version: 2023-03-01-preview
+  description: >-
+    Defender EASM discovers and maps your digital attack surface to provide an
+    "outside-in" perspective using probes to discover assets. The assets are
+    provided with detailed metadata associated, including vulnerabilities,
+    configurations and web components, allowing customers to view and prioritize
+    external risk. The EASM REST API enables you to develop clients that
+    integrate with your application.
+tags:
+  - name: Assets
+  - name: Data Connections
+  - name: Discovery Groups
+  - name: Discovery Templates
+  - name: Reports
+  - name: Saved Filters
+  - name: Tasks
+paths:
+  /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/workspaces/{workspaceName}/assets:
+    get:
+      tags:
+        - Assets
+      operationId: Assets_Assets_List
+      description: Retrieve a list of assets for the provided search parameters.
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+        - $ref: '#/components/parameters/ResourceGroupNameParameter'
+        - $ref: '#/components/parameters/WorkspaceNameParameter'
+        - $ref: '#/components/parameters/FilterParameter'
+        - $ref: '#/components/parameters/OrderByParameter'
+        - $ref: '#/components/parameters/SkipParameter'
+        - $ref: '#/components/parameters/MaxPageSizeParameter'
+        - $ref: '#/components/parameters/MarkParameter'
+        - $ref: '#/components/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssetPageResponse'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: true
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      tags:
+        - Assets
+      operationId: Assets_Assets_Update
+      description: Update labels on assets matching the provided filter.
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+        - $ref: '#/components/parameters/ResourceGroupNameParameter'
+        - $ref: '#/components/parameters/WorkspaceNameParameter'
+        - $ref: '#/components/parameters/FilterParameter'
+        - $ref: '#/components/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskResponse'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: true
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssetUpdateRequest'
+  /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/workspaces/{workspaceName}/assets/{assetId}:
+    get:
+      tags:
+        - Assets
+      operationId: Assets_Assets_Get
+      description: Retrieve an asset by assetId.
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+        - $ref: '#/components/parameters/ResourceGroupNameParameter'
+        - $ref: '#/components/parameters/WorkspaceNameParameter'
+        - $ref: '#/components/parameters/AssetIdParameter'
+        - $ref: '#/components/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssetResponse'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: true
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/workspaces/{workspaceName}/dataConnections:
+    get:
+      tags:
+        - Data Connections
+      operationId: DataConnections_DataConnections_List
+      description: Retrieve a list of data connections.
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+        - $ref: '#/components/parameters/ResourceGroupNameParameter'
+        - $ref: '#/components/parameters/WorkspaceNameParameter'
+        - $ref: '#/components/parameters/SkipParameter'
+        - $ref: '#/components/parameters/MaxPageSizeParameter'
+        - $ref: '#/components/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataConnectionPageResponse'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: true
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/workspaces/{workspaceName}/dataConnections/{dataConnectionName}:
+    get:
+      tags:
+        - Data Connections
+      operationId: DataConnections_DataConnections_Get
+      description: Retrieve a data connection with a given dataConnectionName.
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+        - $ref: '#/components/parameters/ResourceGroupNameParameter'
+        - $ref: '#/components/parameters/WorkspaceNameParameter'
+        - $ref: '#/components/parameters/DataConnectionNameParameter'
+        - $ref: '#/components/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataConnectionResponse'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: true
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    put:
+      tags:
+        - Data Connections
+      operationId: DataConnections_DataConnections_Put
+      description: Create or update a data connection with a given dataConnectionName.
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+        - $ref: '#/components/parameters/ResourceGroupNameParameter'
+        - $ref: '#/components/parameters/WorkspaceNameParameter'
+        - $ref: '#/components/parameters/DataConnectionNameParameter'
+        - $ref: '#/components/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataConnectionResponse'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: true
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DataConnectionRequest'
+    delete:
+      tags:
+        - Data Connections
+      operationId: DataConnections_DataConnections_Delete
+      description: Delete a data connection with a given dataConnectionName.
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+        - $ref: '#/components/parameters/ResourceGroupNameParameter'
+        - $ref: '#/components/parameters/WorkspaceNameParameter'
+        - $ref: '#/components/parameters/DataConnectionNameParameter'
+        - $ref: '#/components/parameters/ApiVersionParameter'
+      responses:
+        '204':
+          description: >-
+            There is no content to send for this request, but the headers may be
+            useful. 
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: true
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/workspaces/{workspaceName}/dataConnections:validate:
+    post:
+      tags:
+        - Data Connections
+      operationId: DataConnections_DataConnections_Validate
+      description: Validate a data connection with a given dataConnectionName.
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+        - $ref: '#/components/parameters/ResourceGroupNameParameter'
+        - $ref: '#/components/parameters/WorkspaceNameParameter'
+        - $ref: '#/components/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateResponse'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: true
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DataConnectionRequest'
+  /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/workspaces/{workspaceName}/discoGroups:
+    get:
+      tags:
+        - Discovery Groups
+      operationId: DiscoveryGroups_DiscoveryGroups_List
+      description: Retrieve a list of discovery group for the provided search parameters.
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+        - $ref: '#/components/parameters/ResourceGroupNameParameter'
+        - $ref: '#/components/parameters/WorkspaceNameParameter'
+        - $ref: '#/components/parameters/FilterParameter'
+        - $ref: '#/components/parameters/SkipParameter'
+        - $ref: '#/components/parameters/MaxPageSizeParameter'
+        - $ref: '#/components/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DiscoGroupPageResponse'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: true
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/workspaces/{workspaceName}/discoGroups/{groupName}:
+    get:
+      tags:
+        - Discovery Groups
+      operationId: DiscoveryGroups_DiscoveryGroups_Get
+      description: Retrieve a discovery group with a given groupName.
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+        - $ref: '#/components/parameters/ResourceGroupNameParameter'
+        - $ref: '#/components/parameters/WorkspaceNameParameter'
+        - $ref: '#/components/parameters/DiscoGroupNameParameter'
+        - $ref: '#/components/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DiscoGroupResponse'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: true
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    put:
+      tags:
+        - Discovery Groups
+      operationId: DiscoveryGroups_DiscoveryGroups_Put
+      description: Create a discovery group with a given groupName.
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+        - $ref: '#/components/parameters/ResourceGroupNameParameter'
+        - $ref: '#/components/parameters/WorkspaceNameParameter'
+        - $ref: '#/components/parameters/DiscoGroupNameParameter'
+        - $ref: '#/components/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DiscoGroupResponse'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: true
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DiscoGroupRequest'
+  /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/workspaces/{workspaceName}/discoGroups/{groupName}/runs:
+    get:
+      tags:
+        - Discovery Groups
+      operationId: DiscoveryGroups_DiscoveryGroups_ListRuns
+      description: >-
+        Retrieve a collection of discovery run results for a discovery group
+        with a given groupName.
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+        - $ref: '#/components/parameters/ResourceGroupNameParameter'
+        - $ref: '#/components/parameters/WorkspaceNameParameter'
+        - $ref: '#/components/parameters/DiscoGroupNameParameter'
+        - $ref: '#/components/parameters/FilterParameter'
+        - $ref: '#/components/parameters/SkipParameter'
+        - $ref: '#/components/parameters/MaxPageSizeParameter'
+        - $ref: '#/components/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DiscoRunPageResponse'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: true
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/workspaces/{workspaceName}/discoGroups/{groupName}:run:
+    post:
+      tags:
+        - Discovery Groups
+      operationId: DiscoveryGroups_DiscoveryGroups_Run
+      description: Run a discovery group with a given groupName.
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+        - $ref: '#/components/parameters/ResourceGroupNameParameter'
+        - $ref: '#/components/parameters/WorkspaceNameParameter'
+        - $ref: '#/components/parameters/DiscoGroupNameParameter'
+        - $ref: '#/components/parameters/ApiVersionParameter'
+      responses:
+        '204':
+          description: >-
+            There is no content to send for this request, but the headers may be
+            useful. 
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: true
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/workspaces/{workspaceName}/discoGroups:validate/{groupName}:
+    post:
+      tags:
+        - Discovery Groups
+      operationId: DiscoveryGroups_DiscoveryGroups_Validate
+      description: Validate a discovery group with a given groupName.
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+        - $ref: '#/components/parameters/ResourceGroupNameParameter'
+        - $ref: '#/components/parameters/WorkspaceNameParameter'
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - $ref: '#/components/parameters/DiscoGroupNameParameter'
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateResponse'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: true
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DiscoGroupRequest'
+  /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/workspaces/{workspaceName}/discoTemplates:
+    get:
+      tags:
+        - Discovery Templates
+      operationId: DiscoveryTemplates_DiscoveryTemplates_List
+      description: Retrieve a list of disco templates for the provided search parameters.
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+        - $ref: '#/components/parameters/ResourceGroupNameParameter'
+        - $ref: '#/components/parameters/WorkspaceNameParameter'
+        - $ref: '#/components/parameters/FilterParameter'
+        - $ref: '#/components/parameters/SkipParameter'
+        - $ref: '#/components/parameters/MaxPageSizeParameter'
+        - $ref: '#/components/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DiscoTemplatePageResponse'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: true
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/workspaces/{workspaceName}/discoTemplates/{templateId}:
+    get:
+      tags:
+        - Discovery Templates
+      operationId: DiscoveryTemplates_DiscoveryTemplates_Get
+      description: Retrieve a disco template with a given templateId.
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+        - $ref: '#/components/parameters/ResourceGroupNameParameter'
+        - $ref: '#/components/parameters/WorkspaceNameParameter'
+        - $ref: '#/components/parameters/DiscoTemplateIdParameter'
+        - $ref: '#/components/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DiscoTemplateResponse'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: true
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/workspaces/{workspaceName}/reports/assets:getBillable:
+    post:
+      tags:
+        - Reports
+      operationId: Reports_Reports_Billable
+      description: Get billable assets summary for the workspace.
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+        - $ref: '#/components/parameters/ResourceGroupNameParameter'
+        - $ref: '#/components/parameters/WorkspaceNameParameter'
+        - $ref: '#/components/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportBillableAssetSummaryResponse'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: true
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/workspaces/{workspaceName}/reports/assets:getSnapshot:
+    post:
+      tags:
+        - Reports
+      operationId: Reports_Reports_Snapshot
+      description: >-
+        Get the most recent snapshot of asset summary values for the snapshot
+        request.
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+        - $ref: '#/components/parameters/ResourceGroupNameParameter'
+        - $ref: '#/components/parameters/WorkspaceNameParameter'
+        - $ref: '#/components/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportAssetSnapshotResponse'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: true
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportAssetSnapshotRequest'
+  /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/workspaces/{workspaceName}/reports/assets:getSnapshotExport:
+    post:
+      tags:
+        - Reports
+      operationId: Reports_Reports_Snapshot_Export
+      description: >-
+        Queue an export of the most recent snapshot of asset summary values to a
+        file.
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+        - $ref: '#/components/parameters/ResourceGroupNameParameter'
+        - $ref: '#/components/parameters/WorkspaceNameParameter'
+        - $ref: '#/components/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskResponse'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: true
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportAssetSnapshotExportRequest'
+  /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/workspaces/{workspaceName}/reports/assets:getSummary:
+    post:
+      tags:
+        - Reports
+      operationId: Reports_Reports_Summary
+      description: Get asset summary details for the summary request.
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+        - $ref: '#/components/parameters/ResourceGroupNameParameter'
+        - $ref: '#/components/parameters/WorkspaceNameParameter'
+        - $ref: '#/components/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportAssetSummaryResponse'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: true
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportAssetSummaryRequest'
+  /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/workspaces/{workspaceName}/savedFilters:
+    get:
+      tags:
+        - Saved Filters
+      operationId: SavedFilters_SavedFilters_List
+      description: Retrieve a list of saved filters for the provided search parameters.
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+        - $ref: '#/components/parameters/ResourceGroupNameParameter'
+        - $ref: '#/components/parameters/WorkspaceNameParameter'
+        - $ref: '#/components/parameters/FilterParameter'
+        - $ref: '#/components/parameters/SkipParameter'
+        - $ref: '#/components/parameters/MaxPageSizeParameter'
+        - $ref: '#/components/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SavedFilterPageResponse'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: true
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/workspaces/{workspaceName}/savedFilters/{filterName}:
+    get:
+      tags:
+        - Saved Filters
+      operationId: SavedFilters_SavedFilters_Get
+      description: Retrieve a saved filter by filterName.
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+        - $ref: '#/components/parameters/ResourceGroupNameParameter'
+        - $ref: '#/components/parameters/WorkspaceNameParameter'
+        - $ref: '#/components/parameters/SavedFilterNameParameter'
+        - $ref: '#/components/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SavedFilterResponse'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: true
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    put:
+      tags:
+        - Saved Filters
+      operationId: SavedFilters_SavedFilters_Put
+      description: Create or update a saved filter with a given filterName.
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+        - $ref: '#/components/parameters/ResourceGroupNameParameter'
+        - $ref: '#/components/parameters/WorkspaceNameParameter'
+        - $ref: '#/components/parameters/SavedFilterNameParameter'
+        - $ref: '#/components/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SavedFilterResponse'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: true
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SavedFilterRequest'
+    delete:
+      tags:
+        - Saved Filters
+      operationId: SavedFilters_SavedFilters_Delete
+      description: Delete a saved filter with a given filterName.
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+        - $ref: '#/components/parameters/ResourceGroupNameParameter'
+        - $ref: '#/components/parameters/WorkspaceNameParameter'
+        - $ref: '#/components/parameters/SavedFilterNameParameter'
+        - $ref: '#/components/parameters/ApiVersionParameter'
+      responses:
+        '204':
+          description: >-
+            There is no content to send for this request, but the headers may be
+            useful. 
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: true
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/workspaces/{workspaceName}/tasks:
+    get:
+      tags:
+        - Tasks
+      operationId: Tasks_Tasks_List
+      description: Retrieve a list of tasks for the provided search parameters.
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+        - $ref: '#/components/parameters/ResourceGroupNameParameter'
+        - $ref: '#/components/parameters/WorkspaceNameParameter'
+        - $ref: '#/components/parameters/FilterParameter'
+        - $ref: '#/components/parameters/OrderByParameter'
+        - $ref: '#/components/parameters/SkipParameter'
+        - $ref: '#/components/parameters/MaxPageSizeParameter'
+        - $ref: '#/components/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskPageResponse'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: true
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/workspaces/{workspaceName}/tasks/{taskId}:
+    get:
+      tags:
+        - Tasks
+      operationId: Tasks_Tasks_Get
+      description: Retrieve a task by taskId.
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+        - $ref: '#/components/parameters/ResourceGroupNameParameter'
+        - $ref: '#/components/parameters/WorkspaceNameParameter'
+        - $ref: '#/components/parameters/TaskIdParameter'
+        - $ref: '#/components/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskResponse'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: true
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/workspaces/{workspaceName}/tasks/{taskId}:cancel:
+    post:
+      tags:
+        - Tasks
+      operationId: Tasks_Tasks_Cancel
+      description: Cancel a task by taskId.
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+        - $ref: '#/components/parameters/ResourceGroupNameParameter'
+        - $ref: '#/components/parameters/WorkspaceNameParameter'
+        - $ref: '#/components/parameters/TaskIdParameter'
+        - $ref: '#/components/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskResponse'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: true
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+security:
+  - azure_auth:
+      - user_impersonation
+components:
+  parameters:
+    ApiVersionParameter:
+      name: api-version
+      in: query
+      required: true
+      schema:
+        type: string
+    AssetIdParameter:
+      name: assetId
+      in: path
+      required: true
+      schema:
+        type: string
+    DataConnectionNameParameter:
+      name: dataConnectionName
+      in: path
+      required: true
+      schema:
+        type: string
+    DiscoGroupNameParameter:
+      name: groupName
+      in: path
+      required: true
+      schema:
+        type: string
+    DiscoTemplateIdParameter:
+      name: templateId
+      in: path
+      required: true
+      schema:
+        type: string
+    FilterParameter:
+      name: filter
+      in: query
+      required: false
+      schema:
+        type: string
+    MarkParameter:
+      name: mark
+      in: query
+      required: false
+      schema:
+        type: string
+    MaxPageSizeParameter:
+      name: maxpagesize
+      in: query
+      required: false
+      schema:
+        type: integer
+        format: int32
+    OrderByParameter:
+      name: orderby
+      in: query
+      required: false
+      schema:
+        type: string
+    ResourceGroupNameParameter:
+      name: resourceGroupName
+      in: path
+      required: true
+      schema:
+        type: string
+    SavedFilterNameParameter:
+      name: filterName
+      in: path
+      required: true
+      schema:
+        type: string
+    SkipParameter:
+      name: skip
+      in: query
+      required: false
+      schema:
+        type: integer
+        format: int32
+    SubscriptionIdParameter:
+      name: subscriptionId
+      in: path
+      required: true
+      schema:
+        type: string
+    TaskIdParameter:
+      name: taskId
+      in: path
+      required: true
+      schema:
+        type: string
+    WorkspaceNameParameter:
+      name: workspaceName
+      in: path
+      required: true
+      schema:
+        type: string
+  schemas:
+    AlexaInfo:
+      type: object
+      properties:
+        alexaRank:
+          type: integer
+          format: int64
+        category:
+          type: string
+        firstSeen:
+          type: string
+          format: date-time
+        lastSeen:
+          type: string
+          format: date-time
+        count:
+          type: integer
+          format: int64
+        recent:
+          type: boolean
+      description: AlexaInfo
+    AsAsset:
+      type: object
+      properties:
+        asn:
+          type: integer
+          format: int64
+        asNames:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        orgNames:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        orgIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        countries:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        registries:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Source'
+          x-typespec-name: Source[]
+        firstSeen:
+          type: string
+          format: date-time
+        lastSeen:
+          type: string
+          format: date-time
+        count:
+          type: integer
+          format: int64
+        registrarCreatedAt:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedLong'
+          x-typespec-name: ObservedLong[]
+        registrarUpdatedAt:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedLong'
+          x-typespec-name: ObservedLong[]
+        registrantContacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        adminContacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        technicalContacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        registrarNames:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        registrantNames:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        adminNames:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        technicalNames:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        adminOrgs:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        technicalOrgs:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        registrantPhones:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        adminPhones:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        technicalPhones:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        detailedFromWhoisAt:
+          type: string
+          format: date-time
+      description: AsAsset
+    AsAssetResponse:
+      type: object
+      properties:
+        kind:
+          type: string
+          enum:
+            - as
+        asset:
+          $ref: '#/components/schemas/AsAsset'
+      required:
+        - kind
+        - asset
+      allOf:
+        - $ref: '#/components/schemas/AssetResponse'
+    AsAssetResponseItem:
+      type: object
+      properties:
+        kind:
+          type: string
+          enum:
+            - as
+        asset:
+          $ref: '#/components/schemas/AsAsset'
+      required:
+        - kind
+        - asset
+      allOf:
+        - $ref: '#/components/schemas/AssetResponseItem'
+    AssetKind:
+      type: string
+      enum:
+        - as
+        - contact
+        - domain
+        - host
+        - ipAddress
+        - ipBlock
+        - page
+        - sslCert
+    AssetPageResponse:
+      type: object
+      properties:
+        totalElements:
+          type: integer
+          format: int64
+          description: The total number of items available in the full result set.
+        mark:
+          type: string
+          description: >-
+            The cursor mark to be used on the next request.  Not set if using
+            paging.
+        nextLink:
+          type: string
+          description: >-
+            The link to access the next page of results.  Not set if at the end
+            of the result set.
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/AssetResponseItem'
+          x-typespec-name: AssetResponse[]
+          description: The items in the current page of results.
+      description: AssetPageResponse
+      required:
+        - value
+    AssetResponse:
+      type: object
+      properties:
+        kind:
+          type: string
+          description: Discriminator property for AssetResponse.
+        id:
+          type: string
+          description: The system generated unique id for the resource.
+        name:
+          type: string
+          description: The caller provided unique name for the resource.
+        displayName:
+          type: string
+          description: The name that can be used for display purposes.
+        uuid:
+          allOf:
+            - $ref: '#/components/schemas/uuid'
+          description: Global UUID for the asset.
+        asset:
+          $ref: '#/components/schemas/InventoryAsset'
+        createdDate:
+          type: string
+          format: date-time
+          description: The date this asset was first added to this workspace.
+        updatedDate:
+          type: string
+          format: date-time
+          description: The date this asset was last updated for this workspace.
+        state:
+          $ref: '#/components/schemas/AssetState'
+        externalId:
+          type: string
+          description: An optional customer provided identifier for this asset.
+        labels:
+          type: array
+          items:
+            type: string
+          x-typespec-name: string[]
+          description: Customer labels assigned to this asset.
+        wildcard:
+          type: boolean
+          description: >-
+            An indicator of whether this asset represents a wildcard rollup of
+            assets on this domain.
+        discoGroupName:
+          type: string
+          description: >-
+            The name of the DiscoveryGroup that brought added this asset to the
+            workspace.
+        auditTrail:
+          type: array
+          items:
+            $ref: '#/components/schemas/AuditTrailItem'
+          x-typespec-name: AuditTrailItem[]
+          description: >-
+            The history of how this asset was pulled into the workspace through
+            the discovery process.
+        reason:
+          type: string
+      description: AssetResponse
+      discriminator:
+        propertyName: kind
+        mapping:
+          as: '#/components/schemas/AsAssetResponse'
+          contact: '#/components/schemas/ContactAssetResponse'
+          domain: '#/components/schemas/DomainAssetResponse'
+          host: '#/components/schemas/HostAssetResponse'
+          ipAddress: '#/components/schemas/IpAddressAssetResponse'
+          ipBlock: '#/components/schemas/IpBlockAssetResponse'
+          page: '#/components/schemas/PageAssetResponse'
+          sslCert: '#/components/schemas/SslCertAssetResponse'
+      required:
+        - asset
+    AssetResponseItem:
+      type: object
+      properties:
+        kind:
+          type: string
+          description: Discriminator property for AssetResponse.
+        statusCode:
+          type: number
+          enum:
+            - 200
+        id:
+          type: string
+          description: The system generated unique id for the resource.
+        name:
+          type: string
+          description: The caller provided unique name for the resource.
+        displayName:
+          type: string
+          description: The name that can be used for display purposes.
+        uuid:
+          allOf:
+            - $ref: '#/components/schemas/uuid'
+          description: Global UUID for the asset.
+        asset:
+          $ref: '#/components/schemas/InventoryAsset'
+        createdDate:
+          type: string
+          format: date-time
+          description: The date this asset was first added to this workspace.
+        updatedDate:
+          type: string
+          format: date-time
+          description: The date this asset was last updated for this workspace.
+        state:
+          $ref: '#/components/schemas/AssetState'
+        externalId:
+          type: string
+          description: An optional customer provided identifier for this asset.
+        labels:
+          type: array
+          items:
+            type: string
+          x-typespec-name: string[]
+          description: Customer labels assigned to this asset.
+        wildcard:
+          type: boolean
+          description: >-
+            An indicator of whether this asset represents a wildcard rollup of
+            assets on this domain.
+        discoGroupName:
+          type: string
+          description: >-
+            The name of the DiscoveryGroup that brought added this asset to the
+            workspace.
+        auditTrail:
+          type: array
+          items:
+            $ref: '#/components/schemas/AuditTrailItem'
+          x-typespec-name: AuditTrailItem[]
+          description: >-
+            The history of how this asset was pulled into the workspace through
+            the discovery process.
+        reason:
+          type: string
+      description: AssetResponse
+      discriminator:
+        propertyName: kind
+        mapping:
+          as: '#/components/schemas/AsAssetResponseItem'
+          contact: '#/components/schemas/ContactAssetResponseItem'
+          domain: '#/components/schemas/DomainAssetResponseItem'
+          host: '#/components/schemas/HostAssetResponseItem'
+          ipAddress: '#/components/schemas/IpAddressAssetResponseItem'
+          ipBlock: '#/components/schemas/IpBlockAssetResponseItem'
+          page: '#/components/schemas/PageAssetResponseItem'
+          sslCert: '#/components/schemas/SslCertAssetResponseItem'
+      required:
+        - statusCode
+        - asset
+    AssetSecurityPolicy:
+      type: object
+      properties:
+        policyName:
+          type: string
+        isAffected:
+          type: boolean
+        description:
+          type: string
+        firstSeen:
+          type: string
+          format: date-time
+        lastSeen:
+          type: string
+          format: date-time
+        count:
+          type: integer
+          format: int64
+        recent:
+          type: boolean
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Source'
+          x-typespec-name: Source[]
+      description: AssetSecurityPolicy
+    AssetState:
+      type: string
+      enum:
+        - candidate
+        - confirmed
+        - dismissed
+        - candidateInvestigate
+        - associatedPartner
+        - associatedThirdparty
+        - archived
+    AssetSummaryResponse:
+      type: object
+      properties:
+        displayName:
+          type: string
+          description: >-
+            The name of the summary response.  Depending on the request time
+            this will either be the asset filter, risk category, or risk metric.
+        description:
+          type: string
+          description: >-
+            The description of the summary response.  Filters don't have a
+            description.
+        updatedAt:
+          type: string
+          format: date-time
+          description: >-
+            The last time risk categories or risk metrics were captured. Set to
+            the current time for asset filter requests, which always pull the
+            live asset data.
+        metricCategory:
+          type: string
+          description: >-
+            If the request is for a metric category, this will contain the
+            requested unique category name.
+        metric:
+          type: string
+          description: >-
+            If the request is for a metric, this will contain the requested
+            unique metric name.
+        filter:
+          type: string
+          description: >-
+            If the request is for an asset filter, this will contain the
+            corresponding filter.
+        labelName:
+          type: string
+          description: An optional label used to filter requests results.
+        count:
+          type: integer
+          format: int64
+          description: The count of assets matching the request parameters.
+        link:
+          type: string
+          description: The link to the corresponding asset details.
+        children:
+          type: array
+          items:
+            $ref: '#/components/schemas/AssetSummaryResponse'
+          x-typespec-name: AssetSummaryResponse[]
+          description: >-
+            The corresponding child entities.  For metric categories this will
+            contain metrics.  For filters with groupBy and segmentBy this will
+            contain facets.
+      description: AssetSummaryResponse
+    AssetUpdateRequest:
+      type: object
+      properties:
+        state:
+          allOf:
+            - $ref: '#/components/schemas/AssetUpdateState'
+          description: The state to update the asset to.
+        externalId:
+          type: string
+          description: >-
+            A string which can be used to identify the asset in external
+            systems.
+        labels:
+          allOf:
+            - $ref: '#/components/schemas/object'
+          description: Any Labels to update the asset with.
+        transfers:
+          allOf:
+            - $ref: '#/components/schemas/AssetUpdateTransfers'
+          description: A list of asset types to cascade the updates to.
+      description: AssetUpdateRequest
+    AssetUpdateState:
+      type: string
+      enum:
+        - candidate
+        - confirmed
+        - dismissed
+        - candidateInvestigate
+        - associatedPartner
+        - associatedThirdparty
+    AssetUpdateTransfers:
+      type: string
+      enum:
+        - as
+        - contact
+        - domain
+        - host
+        - ipAddress
+        - ipBlock
+        - page
+        - sslCert
+    Attribute:
+      type: object
+      properties:
+        attributeType:
+          type: string
+        attributeValue:
+          type: string
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Source'
+          x-typespec-name: Source[]
+        firstSeen:
+          type: string
+          format: date-time
+        lastSeen:
+          type: string
+          format: date-time
+        count:
+          type: integer
+          format: int64
+        recent:
+          type: boolean
+      description: Attribute
+    AuditTrailItem:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The system generated unique id for the resource.
+        name:
+          type: string
+          description: The caller provided unique name for the resource.
+        displayName:
+          type: string
+          description: The name that can be used for display purposes.
+        kind:
+          allOf:
+            - $ref: '#/components/schemas/AuditTrailItemKind'
+          description: The kind of asset.
+        reason:
+          type: string
+          description: >-
+            An explanation of why this audit trail node was discovered from the
+            previous node.
+      description: AuditTrailItem
+    AuditTrailItemKind:
+      type: string
+      enum:
+        - as
+        - contact
+        - domain
+        - host
+        - ipAddress
+        - ipBlock
+        - page
+        - sslCert
+    AzureDataExplorerDataConnectionProperties:
+      type: object
+      properties:
+        clusterName:
+          type: string
+          description: The azure data explorer cluster name
+        region:
+          type: string
+          description: The azure data explorer region
+        databaseName:
+          type: string
+          description: The azure data explorer database name
+      description: AzureDataExplorerDataConnectionProperties
+    AzureDataExplorerDataConnectionRequest:
+      type: object
+      properties:
+        kind:
+          type: string
+          enum:
+            - azureDataExplorer
+        properties:
+          $ref: '#/components/schemas/AzureDataExplorerDataConnectionProperties'
+      required:
+        - kind
+        - properties
+      allOf:
+        - $ref: '#/components/schemas/DataConnectionRequest'
+    AzureDataExplorerDataConnectionResponse:
+      type: object
+      properties:
+        kind:
+          type: string
+          enum:
+            - azureDataExplorer
+        properties:
+          $ref: '#/components/schemas/AzureDataExplorerDataConnectionProperties'
+      required:
+        - kind
+        - properties
+      allOf:
+        - $ref: '#/components/schemas/DataConnectionResponse'
+    AzureDataExplorerDataConnectionResponseItem:
+      type: object
+      properties:
+        kind:
+          type: string
+          enum:
+            - azureDataExplorer
+        properties:
+          $ref: '#/components/schemas/AzureDataExplorerDataConnectionProperties'
+      required:
+        - kind
+        - properties
+      allOf:
+        - $ref: '#/components/schemas/DataConnectionResponseItem'
+    Banner:
+      type: object
+      properties:
+        port:
+          type: integer
+          format: int32
+        banner:
+          type: string
+        firstSeen:
+          type: string
+          format: date-time
+        lastSeen:
+          type: string
+          format: date-time
+        count:
+          type: integer
+          format: int64
+        scanType:
+          type: string
+        bannerMetadata:
+          type: string
+        recent:
+          type: boolean
+        sha256:
+          type: string
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Source'
+          x-typespec-name: Source[]
+      description: Banner
+    CVSS3Summary:
+      type: object
+      properties:
+        version:
+          type: string
+        vectorString:
+          type: string
+        attackVector:
+          type: string
+        attackComplexity:
+          type: string
+        privilegesRequired:
+          type: string
+        userInteraction:
+          type: string
+        scope:
+          type: string
+        confidentialityImpact:
+          type: string
+        integrityImpact:
+          type: string
+        availabilityImpact:
+          type: string
+        baseScore:
+          type: number
+          format: float
+        baseSeverity:
+          type: string
+        exploitCodeMaturity:
+          type: string
+        remediationLevel:
+          type: string
+        reportConfidence:
+          type: string
+        exploitabilityScore:
+          type: number
+          format: float
+        impactScore:
+          type: number
+          format: float
+      description: CVSS3Summary
+    ContactAsset:
+      type: object
+      properties:
+        email:
+          type: string
+        names:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        organizations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Source'
+          x-typespec-name: Source[]
+        firstSeen:
+          type: string
+          format: date-time
+        lastSeen:
+          type: string
+          format: date-time
+        count:
+          type: integer
+          format: int64
+      description: ContactAsset
+    ContactAssetResponse:
+      type: object
+      properties:
+        kind:
+          type: string
+          enum:
+            - contact
+        asset:
+          $ref: '#/components/schemas/ContactAsset'
+      required:
+        - kind
+        - asset
+      allOf:
+        - $ref: '#/components/schemas/AssetResponse'
+    ContactAssetResponseItem:
+      type: object
+      properties:
+        kind:
+          type: string
+          enum:
+            - contact
+        asset:
+          $ref: '#/components/schemas/ContactAsset'
+      required:
+        - kind
+        - asset
+      allOf:
+        - $ref: '#/components/schemas/AssetResponseItem'
+    Cookie:
+      type: object
+      properties:
+        cookieName:
+          type: string
+        cookieDomain:
+          type: string
+        firstSeen:
+          type: string
+          format: date-time
+        lastSeen:
+          type: string
+          format: date-time
+        count:
+          type: integer
+          format: int64
+        recent:
+          type: boolean
+        cookieExpiryDate:
+          type: string
+          format: date-time
+      description: Cookie
+    Cve:
+      type: object
+      properties:
+        name:
+          type: string
+        cweId:
+          type: string
+        cvssScore:
+          type: number
+          format: float
+        cvss3Summary:
+          $ref: '#/components/schemas/CVSS3Summary'
+      description: Cve
+      required:
+        - cvss3Summary
+    DataConnectionContent:
+      type: string
+      enum:
+        - assets
+        - attackSurfaceInsights
+    DataConnectionFrequency:
+      type: string
+      enum:
+        - daily
+        - weekly
+        - monthly
+    DataConnectionKind:
+      type: string
+      enum:
+        - logAnalytics
+        - azureDataExplorer
+    DataConnectionPageResponse:
+      type: object
+      properties:
+        totalElements:
+          type: integer
+          format: int64
+          description: The total number of items available in the full result set.
+        nextLink:
+          type: string
+          description: >-
+            The link to access the next page of results.  Not set if at the end
+            of the result set.
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataConnectionResponseItem'
+          x-typespec-name: DataConnectionResponse[]
+          description: The items in the current page of results.
+      description: DataConnectionPageResponse
+      required:
+        - value
+    DataConnectionProperties:
+      type: object
+      properties: {}
+      description: DataConnectionProperties
+    DataConnectionRequest:
+      type: object
+      properties:
+        kind:
+          type: string
+          description: Discriminator property for DataConnectionRequest.
+        name:
+          type: string
+          description: The name of data connection
+        content:
+          allOf:
+            - $ref: '#/components/schemas/DataConnectionContent'
+          description: The type of data the data connection will transfer.
+        properties:
+          $ref: '#/components/schemas/DataConnectionProperties'
+        frequency:
+          allOf:
+            - $ref: '#/components/schemas/DataConnectionFrequency'
+          description: The rate at which the data connection will receive updates.
+        frequencyOffset:
+          type: integer
+          format: int32
+          description: >-
+            The day to update the data connection on. (1-7 for weekly, 1-31 for
+            monthly)
+      description: DataConnectionRequest
+      discriminator:
+        propertyName: kind
+        mapping:
+          logAnalytics: '#/components/schemas/LogAnalyticsDataConnectionRequest'
+          azureDataExplorer: '#/components/schemas/AzureDataExplorerDataConnectionRequest'
+      required:
+        - properties
+    DataConnectionResponse:
+      type: object
+      properties:
+        kind:
+          type: string
+          description: Discriminator property for DataConnectionResponse.
+        id:
+          type: string
+          description: The system generated unique id for the resource.
+        name:
+          type: string
+          description: The caller provided unique name for the resource.
+        displayName:
+          type: string
+          description: The name that can be used for display purposes.
+        content:
+          allOf:
+            - $ref: '#/components/schemas/DataConnectionContent'
+          description: The type of data the data connection will transfer
+        properties:
+          $ref: '#/components/schemas/DataConnectionProperties'
+        createdDate:
+          type: string
+          format: date-time
+          description: The date the data connection was created.
+        frequency:
+          allOf:
+            - $ref: '#/components/schemas/DataConnectionFrequency'
+          description: The rate at which the data connection will receive updates.
+        frequencyOffset:
+          type: integer
+          format: int32
+          description: The day to update the data connection on.
+        updatedDate:
+          type: string
+          format: date-time
+          description: The date the data connection was last updated.
+        userUpdatedAt:
+          type: string
+          format: date-time
+          description: The date the data connection was last updated by user.
+        active:
+          type: boolean
+          description: An indicator of whether the data connection is active.
+        inactiveMessage:
+          type: string
+          description: A message that specifies details about data connection if inactive.
+      description: DataConnectionResponse
+      discriminator:
+        propertyName: kind
+        mapping:
+          logAnalytics: '#/components/schemas/LogAnalyticsDataConnectionResponse'
+          azureDataExplorer: '#/components/schemas/AzureDataExplorerDataConnectionResponse'
+      required:
+        - properties
+    DataConnectionResponseItem:
+      type: object
+      properties:
+        kind:
+          type: string
+          description: Discriminator property for DataConnectionResponse.
+        statusCode:
+          type: number
+          enum:
+            - 200
+        id:
+          type: string
+          description: The system generated unique id for the resource.
+        name:
+          type: string
+          description: The caller provided unique name for the resource.
+        displayName:
+          type: string
+          description: The name that can be used for display purposes.
+        content:
+          allOf:
+            - $ref: '#/components/schemas/DataConnectionContent'
+          description: The type of data the data connection will transfer
+        properties:
+          $ref: '#/components/schemas/DataConnectionProperties'
+        createdDate:
+          type: string
+          format: date-time
+          description: The date the data connection was created.
+        frequency:
+          allOf:
+            - $ref: '#/components/schemas/DataConnectionFrequency'
+          description: The rate at which the data connection will receive updates.
+        frequencyOffset:
+          type: integer
+          format: int32
+          description: The day to update the data connection on.
+        updatedDate:
+          type: string
+          format: date-time
+          description: The date the data connection was last updated.
+        userUpdatedAt:
+          type: string
+          format: date-time
+          description: The date the data connection was last updated by user.
+        active:
+          type: boolean
+          description: An indicator of whether the data connection is active.
+        inactiveMessage:
+          type: string
+          description: A message that specifies details about data connection if inactive.
+      description: DataConnectionResponse
+      discriminator:
+        propertyName: kind
+        mapping:
+          logAnalytics: '#/components/schemas/LogAnalyticsDataConnectionResponseItem'
+          azureDataExplorer: '#/components/schemas/AzureDataExplorerDataConnectionResponseItem'
+      required:
+        - statusCode
+        - properties
+    DependentResource:
+      type: object
+      properties:
+        md5:
+          type: string
+        responseBodySize:
+          type: integer
+          format: int64
+        firstSeen:
+          type: string
+          format: date-time
+        lastSeen:
+          type: string
+          format: date-time
+        count:
+          type: integer
+          format: int64
+        firstSeenCrawlGuid:
+          type: string
+        firstSeenPageGuid:
+          type: string
+        firstSeenResourceGuid:
+          type: string
+        lastSeenCrawlGuid:
+          type: string
+        lastSeenPageGuid:
+          type: string
+        lastSeenResourceGuid:
+          type: string
+        responseBodyMinhash:
+          type: array
+          items:
+            type: integer
+            format: int32
+          x-typespec-name: int32[]
+        contentType:
+          type: string
+        sha256:
+          type: string
+        sha384:
+          type: string
+        sha512:
+          type: string
+        url:
+          type: string
+        cached:
+          type: boolean
+        sriChecks:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubResourceIntegrityCheck'
+          x-typespec-name: SubResourceIntegrityCheck[]
+        host:
+          type: string
+        lastObservedViolation:
+          type: string
+          format: date-time
+        lastObservedValidation:
+          type: string
+          format: date-time
+        lastObservedActualSriHash:
+          type: string
+        lastObservedExpectedSriHash:
+          type: string
+      description: DependentResource
+    DiscoGroupPageResponse:
+      type: object
+      properties:
+        totalElements:
+          type: integer
+          format: int64
+          description: The total number of items available in the full result set.
+        nextLink:
+          type: string
+          description: >-
+            The link to access the next page of results.  Not set if at the end
+            of the result set.
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/DiscoGroupResponseItem'
+          x-typespec-name: DiscoGroupResponse[]
+          description: The items in the current page of results.
+      description: DiscoGroupPageResponse
+      required:
+        - value
+    DiscoGroupRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name for a disco group.
+        description:
+          type: string
+          description: The description for a disco group.
+        tier:
+          type: string
+          description: >-
+            The tier for the disco group which will affect the algorithm used
+            for the disco runs in this group.
+        frequencyMilliseconds:
+          type: integer
+          format: int64
+          description: >-
+            The frequency at which the disco group is supposed to be rerun in
+            milliseconds.
+        seeds:
+          type: array
+          items:
+            $ref: '#/components/schemas/DiscoSource'
+          x-typespec-name: DiscoSource[]
+          description: The list of seeds used for the disco group runs.
+        names:
+          type: array
+          items:
+            type: string
+          x-typespec-name: string[]
+          description: The list of names used for the disco group runs.
+        excludes:
+          type: array
+          items:
+            $ref: '#/components/schemas/DiscoSource'
+          x-typespec-name: DiscoSource[]
+          description: >-
+            The list of excludes used for the disco group runs, aka assets to
+            exclude from the discovery algorithm.
+        templateId:
+          type: string
+          description: >-
+            The unique identifier for the disco template used for the disco
+            group creation.
+      description: DiscoGroupRequest
+    DiscoGroupResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The system generated unique id for the resource.
+        name:
+          type: string
+          description: The caller provided unique name for the resource.
+        displayName:
+          type: string
+          description: The name that can be used for display purposes.
+        description:
+          type: string
+          description: The description for a disco group.
+        tier:
+          type: string
+          description: >-
+            The tier for the disco group which will affect the algorithm used
+            for the disco runs in this group.
+        frequencyMilliseconds:
+          type: integer
+          format: int64
+          description: >-
+            The frequency at which the disco group is supposed to be rerun in
+            milliseconds.
+        seeds:
+          type: array
+          items:
+            $ref: '#/components/schemas/DiscoSource'
+          x-typespec-name: DiscoSource[]
+          description: The list of seeds used for the disco group runs.
+        names:
+          type: array
+          items:
+            type: string
+          x-typespec-name: string[]
+          description: The list of names used for the disco group runs.
+        excludes:
+          type: array
+          items:
+            $ref: '#/components/schemas/DiscoSource'
+          x-typespec-name: DiscoSource[]
+          description: >-
+            The list of excludes used for the disco group runs, aka assets to
+            exclude from the discovery algorithm.
+        latestRun:
+          $ref: '#/components/schemas/DiscoRunResponse'
+        createdDate:
+          type: string
+          format: date-time
+          description: The date for the disco group was created.
+        templateId:
+          type: string
+          description: >-
+            The unique identifier for the disco template used for the disco
+            group creation.
+      description: DiscoGroupResponse
+      required:
+        - latestRun
+    DiscoGroupResponseItem:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          enum:
+            - 200
+        id:
+          type: string
+          description: The system generated unique id for the resource.
+        name:
+          type: string
+          description: The caller provided unique name for the resource.
+        displayName:
+          type: string
+          description: The name that can be used for display purposes.
+        description:
+          type: string
+          description: The description for a disco group.
+        tier:
+          type: string
+          description: >-
+            The tier for the disco group which will affect the algorithm used
+            for the disco runs in this group.
+        frequencyMilliseconds:
+          type: integer
+          format: int64
+          description: >-
+            The frequency at which the disco group is supposed to be rerun in
+            milliseconds.
+        seeds:
+          type: array
+          items:
+            $ref: '#/components/schemas/DiscoSource'
+          x-typespec-name: DiscoSource[]
+          description: The list of seeds used for the disco group runs.
+        names:
+          type: array
+          items:
+            type: string
+          x-typespec-name: string[]
+          description: The list of names used for the disco group runs.
+        excludes:
+          type: array
+          items:
+            $ref: '#/components/schemas/DiscoSource'
+          x-typespec-name: DiscoSource[]
+          description: >-
+            The list of excludes used for the disco group runs, aka assets to
+            exclude from the discovery algorithm.
+        latestRun:
+          $ref: '#/components/schemas/DiscoRunResponse'
+        createdDate:
+          type: string
+          format: date-time
+          description: The date for the disco group was created.
+        templateId:
+          type: string
+          description: >-
+            The unique identifier for the disco template used for the disco
+            group creation.
+      description: DiscoGroupResponse
+      required:
+        - statusCode
+        - latestRun
+    DiscoRunPageResponse:
+      type: object
+      properties:
+        totalElements:
+          type: integer
+          format: int64
+          description: The total number of items available in the full result set.
+        nextLink:
+          type: string
+          description: >-
+            The link to access the next page of results.  Not set if at the end
+            of the result set.
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/DiscoRunResponse'
+          x-typespec-name: DiscoRunResponse[]
+          description: The items in the current page of results.
+      description: DiscoRunPageResponse
+      required:
+        - value
+    DiscoRunResponse:
+      type: object
+      properties:
+        submittedDate:
+          type: string
+          format: date-time
+          description: The date for when the disco run was created in the system.
+        startedDate:
+          type: string
+          format: date-time
+          description: The date for when the disco run was actually started by the system.
+        completedDate:
+          type: string
+          format: date-time
+          description: The date for when the disco run was completed by the system.
+        tier:
+          type: string
+          description: The tier which will affect the algorithm used for the disco run.
+        state:
+          allOf:
+            - $ref: '#/components/schemas/DiscoRunState'
+          description: The State of the disco run.
+        totalAssetsFoundCount:
+          type: integer
+          format: int64
+          description: The total count of assets that were found this disco run.
+        seeds:
+          type: array
+          items:
+            $ref: '#/components/schemas/DiscoSource'
+          x-typespec-name: DiscoSource[]
+          description: The list of seeds used for the disco run.
+        excludes:
+          type: array
+          items:
+            $ref: '#/components/schemas/DiscoSource'
+          x-typespec-name: DiscoSource[]
+          description: >-
+            The list of excludes used for the disco run, aka assets to exclude
+            from the discovery algorithm.
+        names:
+          type: array
+          items:
+            type: string
+          x-typespec-name: string[]
+          description: The list of names used for the disco run.
+      description: DiscoRunResponse
+    DiscoRunState:
+      type: string
+      enum:
+        - pending
+        - running
+        - completed
+        - failed
+    DiscoSource:
+      type: object
+      properties:
+        kind:
+          allOf:
+            - $ref: '#/components/schemas/DiscoSourceKind'
+          description: The kind of disco source.
+        name:
+          type: string
+          description: The name for the disco source.
+      description: DiscoSource
+    DiscoSourceKind:
+      type: string
+      enum:
+        - as
+        - attribute
+        - contact
+        - domain
+        - host
+        - ipBlock
+    DiscoTemplatePageResponse:
+      type: object
+      properties:
+        totalElements:
+          type: integer
+          format: int64
+          description: The total number of items available in the full result set.
+        nextLink:
+          type: string
+          description: >-
+            The link to access the next page of results.  Not set if at the end
+            of the result set.
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/DiscoTemplateResponseItem'
+          x-typespec-name: DiscoTemplateResponse[]
+          description: The items in the current page of results.
+      description: DiscoTemplatePageResponse
+      required:
+        - value
+    DiscoTemplateResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The system generated unique id for the resource.
+        name:
+          type: string
+          description: The caller provided unique name for the resource.
+        displayName:
+          type: string
+          description: The name that can be used for display purposes.
+        industry:
+          type: string
+          description: The name of the industry.
+        region:
+          type: string
+          description: The name of the region.
+        countryCode:
+          type: string
+          description: The country code.
+        stateCode:
+          type: string
+          description: The state code.
+        city:
+          type: string
+          description: The name of the city.
+        seeds:
+          type: array
+          items:
+            $ref: '#/components/schemas/DiscoSource'
+          x-typespec-name: DiscoSource[]
+          description: The list of disco template seeds.
+        names:
+          type: array
+          items:
+            type: string
+          x-typespec-name: string[]
+          description: The list of disco template names.
+      description: DiscoTemplateResponse
+    DiscoTemplateResponseItem:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          enum:
+            - 200
+        id:
+          type: string
+          description: The system generated unique id for the resource.
+        name:
+          type: string
+          description: The caller provided unique name for the resource.
+        displayName:
+          type: string
+          description: The name that can be used for display purposes.
+        industry:
+          type: string
+          description: The name of the industry.
+        region:
+          type: string
+          description: The name of the region.
+        countryCode:
+          type: string
+          description: The country code.
+        stateCode:
+          type: string
+          description: The state code.
+        city:
+          type: string
+          description: The name of the city.
+        seeds:
+          type: array
+          items:
+            $ref: '#/components/schemas/DiscoSource'
+          x-typespec-name: DiscoSource[]
+          description: The list of disco template seeds.
+        names:
+          type: array
+          items:
+            type: string
+          x-typespec-name: string[]
+          description: The list of disco template names.
+      description: DiscoTemplateResponse
+      required:
+        - statusCode
+    DomainAsset:
+      type: object
+      properties:
+        domain:
+          type: string
+        whoisId:
+          type: integer
+          format: int64
+        registrarIanaIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedInteger'
+          x-typespec-name: ObservedInteger[]
+        registrantContacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        registrantOrgs:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        adminContacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        technicalContacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        alexaInfos:
+          type: array
+          items:
+            $ref: '#/components/schemas/AlexaInfo'
+          x-typespec-name: AlexaInfo[]
+        nameServers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        mailServers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        whoisServers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        domainStatuses:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        registrarCreatedAt:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedLong'
+          x-typespec-name: ObservedLong[]
+        registrarUpdatedAt:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedLong'
+          x-typespec-name: ObservedLong[]
+        registrarExpiresAt:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedLong'
+          x-typespec-name: ObservedLong[]
+        soaRecords:
+          type: array
+          items:
+            $ref: '#/components/schemas/SoaRecord'
+          x-typespec-name: SoaRecord[]
+        detailedFromWhoisAt:
+          type: string
+          format: date-time
+        registrarNames:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Source'
+          x-typespec-name: Source[]
+        firstSeen:
+          type: string
+          format: date-time
+        lastSeen:
+          type: string
+          format: date-time
+        count:
+          type: integer
+          format: int64
+        parkedDomain:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedBoolean'
+          x-typespec-name: ObservedBoolean[]
+        registrantNames:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        adminNames:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        technicalNames:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        adminOrgs:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        technicalOrgs:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        registrantPhones:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        adminPhones:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        technicalPhones:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+      description: DomainAsset
+    DomainAssetResponse:
+      type: object
+      properties:
+        kind:
+          type: string
+          enum:
+            - domain
+        asset:
+          $ref: '#/components/schemas/DomainAsset'
+      required:
+        - kind
+        - asset
+      allOf:
+        - $ref: '#/components/schemas/AssetResponse'
+    DomainAssetResponseItem:
+      type: object
+      properties:
+        kind:
+          type: string
+          enum:
+            - domain
+        asset:
+          $ref: '#/components/schemas/DomainAsset'
+      required:
+        - kind
+        - asset
+      allOf:
+        - $ref: '#/components/schemas/AssetResponseItem'
+    ErrorDetail:
+      type: object
+      properties:
+        code:
+          type: string
+          description: This is one of a server-defined set of error codes.
+        message:
+          type: string
+          description: This is a human-readable representation of the error.
+        target:
+          type: string
+          description: This is the error target.
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+          x-typespec-name: ErrorDetail[]
+          description: >-
+            This is an array of details about specific errors that led to this
+            reported error.
+        innererror:
+          $ref: '#/components/schemas/InnerError'
+      description: ErrorDetail
+      required:
+        - code
+        - message
+        - innererror
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+      description: ErrorResponse
+      required:
+        - error
+    GuidPair:
+      type: object
+      properties:
+        pageGuid:
+          type: string
+        crawlStateGuid:
+          type: string
+        loadDate:
+          type: string
+          format: date-time
+        recent:
+          type: boolean
+      description: GuidPair
+    HostAsset:
+      type: object
+      properties:
+        host:
+          type: string
+        domain:
+          type: string
+        ipAddresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        webComponents:
+          type: array
+          items:
+            $ref: '#/components/schemas/WebComponent'
+          x-typespec-name: WebComponent[]
+        headers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedHeader'
+          x-typespec-name: ObservedHeader[]
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attribute'
+          x-typespec-name: Attribute[]
+        cookies:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cookie'
+          x-typespec-name: Cookie[]
+        sslCerts:
+          type: array
+          items:
+            $ref: '#/components/schemas/SslCertAsset'
+          x-typespec-name: SslCertAsset[]
+        parentHosts:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        childHosts:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        hostCore:
+          $ref: '#/components/schemas/HostCore'
+        services:
+          type: array
+          items:
+            $ref: '#/components/schemas/Service'
+          x-typespec-name: Service[]
+        cnames:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Source'
+          x-typespec-name: Source[]
+        firstSeen:
+          type: string
+          format: date-time
+        lastSeen:
+          type: string
+          format: date-time
+        count:
+          type: integer
+          format: int64
+        resourceUrls:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceUrl'
+          x-typespec-name: ResourceUrl[]
+        scanMetadata:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScanMetadata'
+          x-typespec-name: ScanMetadata[]
+        asns:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedLong'
+          x-typespec-name: ObservedLong[]
+        ipBlocks:
+          type: array
+          items:
+            $ref: '#/components/schemas/IpBlock'
+          x-typespec-name: IpBlock[]
+        responseBodies:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        domainAsset:
+          $ref: '#/components/schemas/DomainAsset'
+        nsRecord:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedBoolean'
+          x-typespec-name: ObservedBoolean[]
+        mxRecord:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedBoolean'
+          x-typespec-name: ObservedBoolean[]
+        webserver:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedBoolean'
+          x-typespec-name: ObservedBoolean[]
+        location:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedLocation'
+          x-typespec-name: ObservedLocation[]
+        nxdomain:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedBoolean'
+          x-typespec-name: ObservedBoolean[]
+        sslServerConfig:
+          type: array
+          items:
+            $ref: '#/components/schemas/SslServerConfig'
+          x-typespec-name: SslServerConfig[]
+        isWildcard:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedBoolean'
+          x-typespec-name: ObservedBoolean[]
+        banners:
+          type: array
+          items:
+            $ref: '#/components/schemas/Banner'
+          x-typespec-name: Banner[]
+        ipv4:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedBoolean'
+          x-typespec-name: ObservedBoolean[]
+        ipv6:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedBoolean'
+          x-typespec-name: ObservedBoolean[]
+      description: HostAsset
+      required:
+        - hostCore
+        - domainAsset
+    HostAssetResponse:
+      type: object
+      properties:
+        kind:
+          type: string
+          enum:
+            - host
+        asset:
+          $ref: '#/components/schemas/HostAsset'
+      required:
+        - kind
+        - asset
+      allOf:
+        - $ref: '#/components/schemas/AssetResponse'
+    HostAssetResponseItem:
+      type: object
+      properties:
+        kind:
+          type: string
+          enum:
+            - host
+        asset:
+          $ref: '#/components/schemas/HostAsset'
+      required:
+        - kind
+        - asset
+      allOf:
+        - $ref: '#/components/schemas/AssetResponseItem'
+    HostCore:
+      type: object
+      properties:
+        host:
+          type: string
+        domain:
+          type: string
+        firstSeen:
+          type: string
+          format: date-time
+        lastSeen:
+          type: string
+          format: date-time
+        count:
+          type: integer
+          format: int64
+        blacklistCauseFirstSeen:
+          type: string
+          format: date-time
+        blacklistCauseLastSeen:
+          type: string
+          format: date-time
+        blacklistCauseCount:
+          type: integer
+          format: int64
+        blacklistResourceFirstSeen:
+          type: string
+          format: date-time
+        blacklistResourceLastSeen:
+          type: string
+          format: date-time
+        blacklistResourceCount:
+          type: integer
+          format: int64
+        blacklistSequenceFirstSeen:
+          type: string
+          format: date-time
+        blacklistSequenceLastSeen:
+          type: string
+          format: date-time
+        blacklistSequenceCount:
+          type: integer
+          format: int64
+        phishCauseCount:
+          type: integer
+          format: int64
+        malwareCauseCount:
+          type: integer
+          format: int64
+        spamCauseCount:
+          type: integer
+          format: int64
+        scamCauseCount:
+          type: integer
+          format: int64
+        phishResourceCount:
+          type: integer
+          format: int64
+        malwareResourceCount:
+          type: integer
+          format: int64
+        spamResourceCount:
+          type: integer
+          format: int64
+        scamResourceCount:
+          type: integer
+          format: int64
+        phishSequenceCount:
+          type: integer
+          format: int64
+        malwareSequenceCount:
+          type: integer
+          format: int64
+        spamSequenceCount:
+          type: integer
+          format: int64
+        scamSequenceCount:
+          type: integer
+          format: int64
+        alexaRank:
+          type: integer
+          format: int32
+        hostReputationScore:
+          type: integer
+          format: int32
+        hostPhishReputationScore:
+          type: integer
+          format: int32
+        hostMalwareReputationScore:
+          type: integer
+          format: int32
+        hostSpamReputationScore:
+          type: integer
+          format: int32
+        hostScamReputationScore:
+          type: integer
+          format: int32
+        domainReputationScore:
+          type: integer
+          format: int32
+        domainPhishReputationScore:
+          type: integer
+          format: int32
+        domainMalwareReputationScore:
+          type: integer
+          format: int32
+        domainSpamReputationScore:
+          type: integer
+          format: int32
+        domainScamReputationScore:
+          type: integer
+          format: int32
+        uuid:
+          type: string
+      description: HostCore
+    ImplicitFlow:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+            - implicit
+          description: implicit flow
+        authorizationUrl:
+          type: string
+          enum:
+            - https://login.microsoftonline.com/common/oauth2/authorize
+          description: the authorization URL
+        scopes:
+          type: array
+          items: {}
+          x-typespec-name: '[user_impersonation]'
+          description: list of scopes for the credential
+      description: Implicit Flow
+      required:
+        - type
+        - authorizationUrl
+        - scopes
+    InnerError:
+      type: object
+      properties:
+        code:
+          type: string
+          description: >-
+            This is a more specific error code than was provided by the
+            containing error.
+        value:
+          allOf:
+            - $ref: '#/components/schemas/object'
+          description: >-
+            This is an additional field representing the value that caused the
+            error to help with debugging.
+      description: InnerError
+    InventoryAsset:
+      type: object
+      properties: {}
+      description: InventoryAsset
+    IpAddressAsset:
+      type: object
+      properties:
+        ipAddress:
+          type: string
+        asns:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedLong'
+          x-typespec-name: ObservedLong[]
+        reputations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Reputation'
+          x-typespec-name: Reputation[]
+        webComponents:
+          type: array
+          items:
+            $ref: '#/components/schemas/WebComponent'
+          x-typespec-name: WebComponent[]
+        netRanges:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        headers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedHeader'
+          x-typespec-name: ObservedHeader[]
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attribute'
+          x-typespec-name: Attribute[]
+        cookies:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cookie'
+          x-typespec-name: Cookie[]
+        sslCerts:
+          type: array
+          items:
+            $ref: '#/components/schemas/SslCertAsset'
+          x-typespec-name: SslCertAsset[]
+        services:
+          type: array
+          items:
+            $ref: '#/components/schemas/Service'
+          x-typespec-name: Service[]
+        ipBlocks:
+          type: array
+          items:
+            $ref: '#/components/schemas/IpBlock'
+          x-typespec-name: IpBlock[]
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Source'
+          x-typespec-name: Source[]
+        firstSeen:
+          type: string
+          format: date-time
+        lastSeen:
+          type: string
+          format: date-time
+        count:
+          type: integer
+          format: int64
+        banners:
+          type: array
+          items:
+            $ref: '#/components/schemas/Banner'
+          x-typespec-name: Banner[]
+        scanMetadata:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScanMetadata'
+          x-typespec-name: ScanMetadata[]
+        nsRecord:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedBoolean'
+          x-typespec-name: ObservedBoolean[]
+        mxRecord:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedBoolean'
+          x-typespec-name: ObservedBoolean[]
+        location:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedLocation'
+          x-typespec-name: ObservedLocation[]
+        hosts:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        nxdomain:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedBoolean'
+          x-typespec-name: ObservedBoolean[]
+        sslServerConfig:
+          type: array
+          items:
+            $ref: '#/components/schemas/SslServerConfig'
+          x-typespec-name: SslServerConfig[]
+        ipv4:
+          type: boolean
+        ipv6:
+          type: boolean
+      description: IpAddressAsset
+    IpAddressAssetResponse:
+      type: object
+      properties:
+        kind:
+          type: string
+          enum:
+            - ipAddress
+        asset:
+          $ref: '#/components/schemas/IpAddressAsset'
+      required:
+        - kind
+        - asset
+      allOf:
+        - $ref: '#/components/schemas/AssetResponse'
+    IpAddressAssetResponseItem:
+      type: object
+      properties:
+        kind:
+          type: string
+          enum:
+            - ipAddress
+        asset:
+          $ref: '#/components/schemas/IpAddressAsset'
+      required:
+        - kind
+        - asset
+      allOf:
+        - $ref: '#/components/schemas/AssetResponseItem'
+    IpBlock:
+      type: object
+      properties:
+        ipBlock:
+          type: string
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Source'
+          x-typespec-name: Source[]
+        firstSeen:
+          type: string
+          format: date-time
+        lastSeen:
+          type: string
+          format: date-time
+        count:
+          type: integer
+          format: int64
+        recent:
+          type: boolean
+      description: IpBlock
+    IpBlockAsset:
+      type: object
+      properties:
+        ipBlock:
+          type: string
+        asns:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedLong'
+          x-typespec-name: ObservedLong[]
+        bgpPrefixes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        netNames:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        registrantContacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        registrantOrgs:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        adminContacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        technicalContacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        registrarCreatedAt:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedLong'
+          x-typespec-name: ObservedLong[]
+        registrarUpdatedAt:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedLong'
+          x-typespec-name: ObservedLong[]
+        netRanges:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        startIp:
+          type: string
+        endIp:
+          type: string
+        reputations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Reputation'
+          x-typespec-name: Reputation[]
+        detailedFromWhoisAt:
+          type: string
+          format: date-time
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Source'
+          x-typespec-name: Source[]
+        firstSeen:
+          type: string
+          format: date-time
+        lastSeen:
+          type: string
+          format: date-time
+        count:
+          type: integer
+          format: int64
+        location:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedLocation'
+          x-typespec-name: ObservedLocation[]
+        registrarExpiresAt:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedLong'
+          x-typespec-name: ObservedLong[]
+        registrantNames:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        adminNames:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        technicalNames:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        adminOrgs:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        technicalOrgs:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        registrantPhones:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        adminPhones:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        technicalPhones:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        ipv4:
+          type: boolean
+        ipv6:
+          type: boolean
+      description: IpBlockAsset
+    IpBlockAssetResponse:
+      type: object
+      properties:
+        kind:
+          type: string
+          enum:
+            - ipBlock
+        asset:
+          $ref: '#/components/schemas/IpBlockAsset'
+      required:
+        - kind
+        - asset
+      allOf:
+        - $ref: '#/components/schemas/AssetResponse'
+    IpBlockAssetResponseItem:
+      type: object
+      properties:
+        kind:
+          type: string
+          enum:
+            - ipBlock
+        asset:
+          $ref: '#/components/schemas/IpBlockAsset'
+      required:
+        - kind
+        - asset
+      allOf:
+        - $ref: '#/components/schemas/AssetResponseItem'
+    Location:
+      type: object
+      properties:
+        countryCode:
+          type: string
+        countryName:
+          type: string
+        region:
+          type: string
+        regionName:
+          type: string
+        city:
+          type: string
+        areaCode:
+          type: integer
+          format: int32
+        postalCode:
+          type: string
+        latitude:
+          type: number
+          format: float
+        longitude:
+          type: number
+          format: float
+        dmaCode:
+          type: integer
+          format: int32
+        metroCodeId:
+          type: integer
+          format: int32
+      description: Location
+    LogAnalyticsDataConnectionProperties:
+      type: object
+      properties:
+        apiKey:
+          type: string
+          description: log analytics api key
+        workspaceId:
+          type: string
+          description: log analytics workspace id
+      description: LogAnalyticsDataConnectionProperties
+    LogAnalyticsDataConnectionRequest:
+      type: object
+      properties:
+        kind:
+          type: string
+          enum:
+            - logAnalytics
+        properties:
+          $ref: '#/components/schemas/LogAnalyticsDataConnectionProperties'
+      required:
+        - kind
+        - properties
+      allOf:
+        - $ref: '#/components/schemas/DataConnectionRequest'
+    LogAnalyticsDataConnectionResponse:
+      type: object
+      properties:
+        kind:
+          type: string
+          enum:
+            - logAnalytics
+        properties:
+          $ref: '#/components/schemas/LogAnalyticsDataConnectionProperties'
+      required:
+        - kind
+        - properties
+      allOf:
+        - $ref: '#/components/schemas/DataConnectionResponse'
+    LogAnalyticsDataConnectionResponseItem:
+      type: object
+      properties:
+        kind:
+          type: string
+          enum:
+            - logAnalytics
+        properties:
+          $ref: '#/components/schemas/LogAnalyticsDataConnectionProperties'
+      required:
+        - kind
+        - properties
+      allOf:
+        - $ref: '#/components/schemas/DataConnectionResponseItem'
+    NoContentResponse:
+      type: object
+      properties: {}
+    ObservedBoolean:
+      type: object
+      properties:
+        value:
+          type: boolean
+        firstSeen:
+          type: string
+          format: date-time
+        lastSeen:
+          type: string
+          format: date-time
+        count:
+          type: integer
+          format: int64
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Source'
+          x-typespec-name: Source[]
+        recent:
+          type: boolean
+      description: ObservedBoolean
+    ObservedHeader:
+      type: object
+      properties:
+        headerName:
+          type: string
+        headerValue:
+          type: string
+        firstSeen:
+          type: string
+          format: date-time
+        lastSeen:
+          type: string
+          format: date-time
+        count:
+          type: integer
+          format: int64
+        recent:
+          type: boolean
+      description: ObservedHeader
+    ObservedInteger:
+      type: object
+      properties:
+        value:
+          type: integer
+          format: int32
+        firstSeen:
+          type: string
+          format: date-time
+        lastSeen:
+          type: string
+          format: date-time
+        count:
+          type: integer
+          format: int64
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Source'
+          x-typespec-name: Source[]
+        recent:
+          type: boolean
+      description: ObservedInteger
+    ObservedIntegers:
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            type: integer
+            format: int32
+          x-typespec-name: int32[]
+        firstSeen:
+          type: string
+          format: date-time
+        lastSeen:
+          type: string
+          format: date-time
+        count:
+          type: integer
+          format: int64
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Source'
+          x-typespec-name: Source[]
+        recent:
+          type: boolean
+      description: ObservedIntegers
+    ObservedLocation:
+      type: object
+      properties:
+        value:
+          $ref: '#/components/schemas/Location'
+        firstSeen:
+          type: string
+          format: date-time
+        lastSeen:
+          type: string
+          format: date-time
+        count:
+          type: integer
+          format: int64
+        recent:
+          type: boolean
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Source'
+          x-typespec-name: Source[]
+      description: ObservedLocation
+      required:
+        - value
+    ObservedLong:
+      type: object
+      properties:
+        value:
+          type: integer
+          format: int64
+        firstSeen:
+          type: string
+          format: date-time
+        lastSeen:
+          type: string
+          format: date-time
+        count:
+          type: integer
+          format: int64
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Source'
+          x-typespec-name: Source[]
+        recent:
+          type: boolean
+      description: ObservedLong
+    ObservedPortState:
+      type: object
+      properties:
+        value:
+          $ref: '#/components/schemas/ObservedPortStateValue'
+        port:
+          type: integer
+          format: int32
+        firstSeen:
+          type: string
+          format: date-time
+        lastSeen:
+          type: string
+          format: date-time
+        count:
+          type: integer
+          format: int64
+        recent:
+          type: boolean
+      description: ObservedPortState
+    ObservedPortStateValue:
+      type: string
+      enum:
+        - open
+        - closed
+        - filtered
+    ObservedString:
+      type: object
+      properties:
+        value:
+          type: string
+        firstSeen:
+          type: string
+          format: date-time
+        lastSeen:
+          type: string
+          format: date-time
+        count:
+          type: integer
+          format: int64
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Source'
+          x-typespec-name: Source[]
+        recent:
+          type: boolean
+      description: ObservedString
+    PageAsset:
+      type: object
+      properties:
+        url:
+          type: string
+        httpMethod:
+          type: string
+        service:
+          type: string
+        ipAddresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        successful:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedBoolean'
+          x-typespec-name: ObservedBoolean[]
+        httpResponseCodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedInteger'
+          x-typespec-name: ObservedInteger[]
+        httpResponseMessages:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        responseTimes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedLong'
+          x-typespec-name: ObservedLong[]
+        frames:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedBoolean'
+          x-typespec-name: ObservedBoolean[]
+        windows:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedBoolean'
+          x-typespec-name: ObservedBoolean[]
+        nonHtmlFrames:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedBoolean'
+          x-typespec-name: ObservedBoolean[]
+        undirectedContent:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedBoolean'
+          x-typespec-name: ObservedBoolean[]
+        contentTypes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        contentLengths:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedLong'
+          x-typespec-name: ObservedLong[]
+        windowNames:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        charsets:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        titles:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        languages:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        responseHeaders:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedHeader'
+          x-typespec-name: ObservedHeader[]
+        cookies:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cookie'
+          x-typespec-name: Cookie[]
+        webComponents:
+          type: array
+          items:
+            $ref: '#/components/schemas/WebComponent'
+          x-typespec-name: WebComponent[]
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attribute'
+          x-typespec-name: Attribute[]
+        assetSecurityPolicies:
+          type: array
+          items:
+            $ref: '#/components/schemas/AssetSecurityPolicy'
+          x-typespec-name: AssetSecurityPolicy[]
+        responseBodyMinhashSignatures:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedIntegers'
+          x-typespec-name: ObservedIntegers[]
+        fullDomMinhashSignatures:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedIntegers'
+          x-typespec-name: ObservedIntegers[]
+        responseBodyHashSignatures:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        sslCerts:
+          type: array
+          items:
+            $ref: '#/components/schemas/SslCertAsset'
+          x-typespec-name: SslCertAsset[]
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Source'
+          x-typespec-name: Source[]
+        firstSeen:
+          type: string
+          format: date-time
+        lastSeen:
+          type: string
+          format: date-time
+        count:
+          type: integer
+          format: int64
+        cause:
+          $ref: '#/components/schemas/PageCause'
+        referrer:
+          type: string
+        redirectUrls:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        redirectType:
+          $ref: '#/components/schemas/PageAssetRedirectType'
+        finalUrls:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        finalResponseCodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedInteger'
+          x-typespec-name: ObservedInteger[]
+        parkedPage:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedBoolean'
+          x-typespec-name: ObservedBoolean[]
+        resourceUrls:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceUrl'
+          x-typespec-name: ResourceUrl[]
+        guids:
+          type: array
+          items:
+            $ref: '#/components/schemas/GuidPair'
+          x-typespec-name: GuidPair[]
+        finalIpAddresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        asns:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedLong'
+          x-typespec-name: ObservedLong[]
+        ipBlocks:
+          type: array
+          items:
+            $ref: '#/components/schemas/IpBlock'
+          x-typespec-name: IpBlock[]
+        finalAsns:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedLong'
+          x-typespec-name: ObservedLong[]
+        finalIpBlocks:
+          type: array
+          items:
+            $ref: '#/components/schemas/IpBlock'
+          x-typespec-name: IpBlock[]
+        responseBodies:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        domainAsset:
+          $ref: '#/components/schemas/DomainAsset'
+        rootUrl:
+          $ref: '#/components/schemas/ObservedBoolean'
+        isRootUrl:
+          type: boolean
+        location:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedLocation'
+          x-typespec-name: ObservedLocation[]
+        services:
+          type: array
+          items:
+            $ref: '#/components/schemas/Service'
+          x-typespec-name: Service[]
+        siteStatus:
+          type: string
+        cnames:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        cdns:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        host:
+          type: string
+        domain:
+          type: string
+        sslServerConfig:
+          type: array
+          items:
+            $ref: '#/components/schemas/SslServerConfig'
+          x-typespec-name: SslServerConfig[]
+        gdprAssetSecurityPolicies:
+          type: array
+          items:
+            $ref: '#/components/schemas/AssetSecurityPolicy'
+          x-typespec-name: AssetSecurityPolicy[]
+        ipv4:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedBoolean'
+          x-typespec-name: ObservedBoolean[]
+        ipv6:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedBoolean'
+          x-typespec-name: ObservedBoolean[]
+      description: PageAsset
+      required:
+        - cause
+        - domainAsset
+        - rootUrl
+    PageAssetRedirectType:
+      type: string
+      enum:
+        - httpHeader
+        - metaRefresh
+        - javascript
+        - final
+    PageAssetResponse:
+      type: object
+      properties:
+        kind:
+          type: string
+          enum:
+            - page
+        asset:
+          $ref: '#/components/schemas/PageAsset'
+      required:
+        - kind
+        - asset
+      allOf:
+        - $ref: '#/components/schemas/AssetResponse'
+    PageAssetResponseItem:
+      type: object
+      properties:
+        kind:
+          type: string
+          enum:
+            - page
+        asset:
+          $ref: '#/components/schemas/PageAsset'
+      required:
+        - kind
+        - asset
+      allOf:
+        - $ref: '#/components/schemas/AssetResponseItem'
+    PageCause:
+      type: object
+      properties:
+        cause:
+          type: string
+        causeElementXPath:
+          type: string
+        location:
+          type: string
+        possibleMatches:
+          type: integer
+          format: int32
+        loopDetected:
+          type: boolean
+        version:
+          type: integer
+          format: int32
+        domChangeIndex:
+          type: integer
+          format: int32
+      description: PageCause
+    Port:
+      type: object
+      properties:
+        port:
+          type: integer
+          format: int32
+        firstSeen:
+          type: string
+          format: date-time
+        lastSeen:
+          type: string
+          format: date-time
+        count:
+          type: integer
+          format: int64
+      description: Port
+    ReportAssetSnapshotExportRequest:
+      type: object
+      properties:
+        metric:
+          type: string
+          description: The metric to retrieve a snapshot for.
+        fileName:
+          type: string
+          description: The filename of the exported file.
+        columns:
+          type: array
+          items:
+            type: string
+          x-typespec-name: string[]
+          description: The columns to include in the export
+      description: ReportAssetSnapshotExportRequest
+    ReportAssetSnapshotRequest:
+      type: object
+      properties:
+        metric:
+          type: string
+          description: The metric to retrieve a snapshot for.
+        labelName:
+          type: string
+          description: The name of the label to retrieve a snapshot for.
+        size:
+          type: integer
+          format: int32
+          description: The number of assets per page.
+        page:
+          type: integer
+          format: int32
+          description: The page to retrieve.
+      description: ReportAssetSnapshotRequest
+    ReportAssetSnapshotResponse:
+      type: object
+      properties:
+        displayName:
+          type: string
+          description: The name of the metric.
+        metric:
+          type: string
+          description: The unique metric name.
+        labelName:
+          type: string
+          description: The customer label that was filtered on, if one was provided.
+        updatedAt:
+          type: string
+          format: date-time
+          description: The last time this asset data was updated on this metric.
+        description:
+          type: string
+          description: A description of what the metric represents.
+        assets:
+          $ref: '#/components/schemas/AssetPageResponse'
+      description: ReportAssetSnapshotResponse
+      required:
+        - assets
+    ReportAssetSummaryRequest:
+      type: object
+      properties:
+        metricCategories:
+          type: array
+          items:
+            type: string
+          x-typespec-name: string[]
+          description: Categories to retrieve risk reporting data for.
+        metrics:
+          type: array
+          items:
+            type: string
+          x-typespec-name: string[]
+          description: Metrics to retrieve risk reporting data for.
+        filters:
+          type: array
+          items:
+            type: string
+          x-typespec-name: string[]
+          description: Query filters to apply to the asset summary.
+        groupBy:
+          type: string
+          description: >-
+            A parameter to group the assets by (first level facet field), only
+            used when the chosen summary identifier is filters.
+        segmentBy:
+          type: string
+          description: >-
+            A parameter to segment the assets by (second level facet field),
+            only used when the chosen summary identifier is filters.
+        labelName:
+          type: string
+          description: Currently unused.
+      description: ReportAssetSummaryRequest
+    ReportAssetSummaryResponse:
+      type: object
+      properties:
+        assetSummaries:
+          type: array
+          items:
+            $ref: '#/components/schemas/AssetSummaryResponse'
+          x-typespec-name: AssetSummaryResponse[]
+          description: The collection of asset summaries.
+      description: ReportAssetSummaryResponse
+    ReportBillableAssetBreakdown:
+      type: object
+      properties:
+        kind:
+          allOf:
+            - $ref: '#/components/schemas/ReportBillableAssetBreakdownKind'
+          description: The kind of billable asset.
+        count:
+          type: integer
+          format: int64
+          description: The number of assets of this type.
+      description: ReportBillableAssetBreakdown
+    ReportBillableAssetBreakdownKind:
+      type: string
+      enum:
+        - domain
+        - host
+        - ipAddress
+    ReportBillableAssetSnapshotResponse:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date
+          description: The date these assets were billed on.
+        total:
+          type: integer
+          format: int64
+          description: The total number of billable assets for this date.
+        assetBreakdown:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReportBillableAssetBreakdown'
+          x-typespec-name: ReportBillableAssetBreakdown[]
+          description: The breakdown of billable asset counts for each asset type.
+      description: ReportBillableAssetSnapshotResponse
+    ReportBillableAssetSummaryResponse:
+      type: object
+      properties:
+        assetSummaries:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReportBillableAssetSnapshotResponse'
+          x-typespec-name: ReportBillableAssetSnapshotResponse[]
+      description: ReportBillableAssetSummaryResponse
+    Reputation:
+      type: object
+      properties:
+        listName:
+          type: string
+        threatType:
+          type: string
+        trusted:
+          type: boolean
+        cidr:
+          type: string
+        firstSeen:
+          type: string
+          format: date-time
+        lastSeen:
+          type: string
+          format: date-time
+        listUpdatedAt:
+          type: string
+          format: date-time
+        recent:
+          type: boolean
+      description: Reputation
+    ResourceUrl:
+      type: object
+      properties:
+        url:
+          type: string
+        resources:
+          type: array
+          items:
+            $ref: '#/components/schemas/DependentResource'
+          x-typespec-name: DependentResource[]
+        firstSeen:
+          type: string
+          format: date-time
+        lastSeen:
+          type: string
+          format: date-time
+        count:
+          type: integer
+          format: int64
+        recent:
+          type: boolean
+      description: ResourceUrl
+    SavedFilterPageResponse:
+      type: object
+      properties:
+        totalElements:
+          type: integer
+          format: int64
+          description: The total number of items available in the full result set.
+        nextLink:
+          type: string
+          description: >-
+            The link to access the next page of results.  Not set if at the end
+            of the result set.
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/SavedFilterResponseItem'
+          x-typespec-name: SavedFilterResponse[]
+          description: The items in the current page of results.
+      description: SavedFilterPageResponse
+      required:
+        - value
+    SavedFilterRequest:
+      type: object
+      properties:
+        filter:
+          type: string
+          description: >-
+            An expression on the resource type that selects the resources to be
+            returned.
+        description:
+          type: string
+          description: A human readable description of the saved filter.
+      description: SavedFilterRequest
+      required:
+        - filter
+        - description
+    SavedFilterResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The system generated unique id for the resource.
+        name:
+          type: string
+          description: The caller provided unique name for the resource.
+        displayName:
+          type: string
+          description: The name that can be used for display purposes.
+        filter:
+          type: string
+        description:
+          type: string
+      description: SavedFilterResponse
+    SavedFilterResponseItem:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          enum:
+            - 200
+        id:
+          type: string
+          description: The system generated unique id for the resource.
+        name:
+          type: string
+          description: The caller provided unique name for the resource.
+        displayName:
+          type: string
+          description: The name that can be used for display purposes.
+        filter:
+          type: string
+        description:
+          type: string
+      description: SavedFilterResponse
+      required:
+        - statusCode
+    ScanMetadata:
+      type: object
+      properties:
+        port:
+          type: integer
+          format: int32
+        bannerMetadata:
+          type: string
+        startScan:
+          type: string
+          format: date-time
+        endScan:
+          type: string
+          format: date-time
+      description: ScanMetadata
+    Service:
+      type: object
+      properties:
+        scheme:
+          type: string
+        port:
+          type: integer
+          format: int32
+        webComponents:
+          type: array
+          items:
+            $ref: '#/components/schemas/WebComponent'
+          x-typespec-name: WebComponent[]
+        sslCerts:
+          type: array
+          items:
+            $ref: '#/components/schemas/SslCertAsset'
+          x-typespec-name: SslCertAsset[]
+        exceptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedString'
+          x-typespec-name: ObservedString[]
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Source'
+          x-typespec-name: Source[]
+        firstSeen:
+          type: string
+          format: date-time
+        lastSeen:
+          type: string
+          format: date-time
+        count:
+          type: integer
+          format: int64
+        recent:
+          type: boolean
+        portStates:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedPortState'
+          x-typespec-name: ObservedPortState[]
+      description: Service
+    SoaRecord:
+      type: object
+      properties:
+        nameServer:
+          type: string
+        email:
+          type: string
+        firstSeen:
+          type: string
+          format: date-time
+        lastSeen:
+          type: string
+          format: date-time
+        count:
+          type: integer
+          format: int64
+        serialNumber:
+          type: integer
+          format: int64
+        recent:
+          type: boolean
+      description: SoaRecord
+    Source:
+      type: object
+      properties:
+        source:
+          type: string
+        firstSeen:
+          type: string
+          format: date-time
+        lastSeen:
+          type: string
+          format: date-time
+        count:
+          type: integer
+          format: int64
+        reason:
+          type: string
+      description: Source
+    SslCertAsset:
+      type: object
+      properties:
+        sha1:
+          type: string
+        subjectCommonNames:
+          type: array
+          items:
+            type: string
+          x-typespec-name: string[]
+        organizations:
+          type: array
+          items:
+            type: string
+          x-typespec-name: string[]
+        organizationalUnits:
+          type: array
+          items:
+            type: string
+          x-typespec-name: string[]
+        issuerCommonNames:
+          type: array
+          items:
+            type: string
+          x-typespec-name: string[]
+        sigAlgName:
+          type: string
+        invalidAfter:
+          type: string
+          format: date-time
+        serialNumber:
+          type: string
+        subjectAlternativeNames:
+          type: array
+          items:
+            type: string
+          x-typespec-name: string[]
+        issuerAlternativeNames:
+          type: array
+          items:
+            type: string
+          x-typespec-name: string[]
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Source'
+          x-typespec-name: Source[]
+        firstSeen:
+          type: string
+          format: date-time
+        lastSeen:
+          type: string
+          format: date-time
+        count:
+          type: integer
+          format: int64
+        invalidBefore:
+          type: string
+          format: date-time
+        keySize:
+          type: integer
+          format: int32
+        keyAlgorithm:
+          type: string
+        subjectLocality:
+          type: array
+          items:
+            type: string
+          x-typespec-name: string[]
+        subjectState:
+          type: array
+          items:
+            type: string
+          x-typespec-name: string[]
+        subjectCountry:
+          type: array
+          items:
+            type: string
+          x-typespec-name: string[]
+        issuerLocality:
+          type: array
+          items:
+            type: string
+          x-typespec-name: string[]
+        issuerState:
+          type: array
+          items:
+            type: string
+          x-typespec-name: string[]
+        issuerCountry:
+          type: array
+          items:
+            type: string
+          x-typespec-name: string[]
+        subjectOrganizations:
+          type: array
+          items:
+            type: string
+          x-typespec-name: string[]
+        subjectOrganizationalUnits:
+          type: array
+          items:
+            type: string
+          x-typespec-name: string[]
+        issuerOrganizations:
+          type: array
+          items:
+            type: string
+          x-typespec-name: string[]
+        issuerOrganizationalUnits:
+          type: array
+          items:
+            type: string
+          x-typespec-name: string[]
+        version:
+          type: integer
+          format: int32
+        certificateAuthority:
+          type: boolean
+        selfSigned:
+          type: boolean
+        sigAlgOid:
+          type: string
+        recent:
+          type: boolean
+        validationType:
+          $ref: '#/components/schemas/SslCertAssetValidationType'
+      description: SslCertAsset
+    SslCertAssetResponse:
+      type: object
+      properties:
+        kind:
+          type: string
+          enum:
+            - sslCert
+        asset:
+          $ref: '#/components/schemas/SslCertAsset'
+      required:
+        - kind
+        - asset
+      allOf:
+        - $ref: '#/components/schemas/AssetResponse'
+    SslCertAssetResponseItem:
+      type: object
+      properties:
+        kind:
+          type: string
+          enum:
+            - sslCert
+        asset:
+          $ref: '#/components/schemas/SslCertAsset'
+      required:
+        - kind
+        - asset
+      allOf:
+        - $ref: '#/components/schemas/AssetResponseItem'
+    SslCertAssetValidationType:
+      type: string
+      enum:
+        - domainValidation
+        - organizationValidation
+        - extendedValidation
+    SslServerConfig:
+      type: object
+      properties:
+        tlsVersions:
+          type: array
+          items:
+            type: string
+          x-typespec-name: string[]
+        cipherSuites:
+          type: array
+          items:
+            type: string
+          x-typespec-name: string[]
+        firstSeen:
+          type: string
+          format: date-time
+        lastSeen:
+          type: string
+          format: date-time
+        count:
+          type: integer
+          format: int64
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Source'
+          x-typespec-name: Source[]
+      description: SslServerConfig
+    SubResourceIntegrityCheck:
+      type: object
+      properties:
+        violation:
+          type: boolean
+        firstSeen:
+          type: string
+          format: date-time
+        lastSeen:
+          type: string
+          format: date-time
+        count:
+          type: integer
+          format: int64
+        causePageUrl:
+          type: string
+        crawlGuid:
+          type: string
+        pageGuid:
+          type: string
+        resourceGuid:
+          type: string
+        expectedHash:
+          type: string
+      description: SubResourceIntegrityCheck
+    TaskPageResponse:
+      type: object
+      properties:
+        totalElements:
+          type: integer
+          format: int64
+          description: The total number of items available in the full result set.
+        nextLink:
+          type: string
+          description: >-
+            The link to access the next page of results.  Not set if at the end
+            of the result set.
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaskResponseItem'
+          x-typespec-name: TaskResponse[]
+          description: The items in the current page of results.
+      description: TaskPageResponse
+      required:
+        - value
+    TaskPhase:
+      type: string
+      enum:
+        - running
+        - polling
+        - complete
+    TaskResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the task.
+        startedAt:
+          type: string
+          format: date-time
+          description: The time the task started.
+        completedAt:
+          type: string
+          format: date-time
+          description: The time the task completed.
+        lastPolledAt:
+          type: string
+          format: date-time
+          description: The last time the status of the task was updated.
+        state:
+          allOf:
+            - $ref: '#/components/schemas/TaskState'
+          description: The state the task is in.
+        phase:
+          allOf:
+            - $ref: '#/components/schemas/TaskPhase'
+          description: The phase the task is in.
+        reason:
+          type: string
+          description: >-
+            The reason the task was moved into its current state, if the task
+            wasn't completed.
+        metadata:
+          allOf:
+            - $ref: '#/components/schemas/object'
+          description: Attributes unique to the task.  This differs by task type.
+      description: TaskResponse
+    TaskResponseItem:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          enum:
+            - 200
+        id:
+          type: string
+          description: The unique identifier of the task.
+        startedAt:
+          type: string
+          format: date-time
+          description: The time the task started.
+        completedAt:
+          type: string
+          format: date-time
+          description: The time the task completed.
+        lastPolledAt:
+          type: string
+          format: date-time
+          description: The last time the status of the task was updated.
+        state:
+          allOf:
+            - $ref: '#/components/schemas/TaskState'
+          description: The state the task is in.
+        phase:
+          allOf:
+            - $ref: '#/components/schemas/TaskPhase'
+          description: The phase the task is in.
+        reason:
+          type: string
+          description: >-
+            The reason the task was moved into its current state, if the task
+            wasn't completed.
+        metadata:
+          allOf:
+            - $ref: '#/components/schemas/object'
+          description: Attributes unique to the task.  This differs by task type.
+      description: TaskResponse
+      required:
+        - statusCode
+    TaskState:
+      type: string
+      enum:
+        - pending
+        - running
+        - paused
+        - complete
+        - incomplete
+        - failed
+        - warning
+    ValidateResponse:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+      description: ValidateResponse
+      required:
+        - error
+    WebComponent:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+        version:
+          type: string
+        ruleId:
+          type: array
+          items:
+            type: string
+          x-typespec-name: string[]
+        firstSeen:
+          type: string
+          format: date-time
+        lastSeen:
+          type: string
+          format: date-time
+        count:
+          type: integer
+          format: int64
+        cve:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cve'
+          x-typespec-name: Cve[]
+        endOfLife:
+          type: integer
+          format: int64
+        recent:
+          type: boolean
+        ports:
+          type: array
+          items:
+            $ref: '#/components/schemas/Port'
+          x-typespec-name: Port[]
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Source'
+          x-typespec-name: Source[]
+        service:
+          type: string
+      description: WebComponent
+    object:
+      type: object
+      properties: {}
+    uuid:
+      type: string
+  securitySchemes:
+    azure_auth:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://login.microsoftonline.com/common/oauth2/authorize
+          scopes:
+            user_impersonation: ''
+      description: Azure Active Directory OAuth2 Flow
+servers:
+  - url: https://{region}.easm.defender.microsoft.com
+    description: ''
+    variables:
+      region:
+        default: eastus

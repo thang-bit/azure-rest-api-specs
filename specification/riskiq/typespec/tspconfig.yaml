@@ -6,7 +6,7 @@ parameters:
 
 emit: [
   "@azure-tools/typespec-python",
-  "@azure-tools/typespec-java"
+  "@typespec/openapi3"
 ]
 
 options:

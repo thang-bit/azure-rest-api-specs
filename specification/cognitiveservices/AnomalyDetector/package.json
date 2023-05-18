@@ -8,12 +8,15 @@
     "@azure-tools/typespec-autorest": "latest",
     "@azure-tools/typespec-azure-core": "latest",
     "@azure-tools/typespec-client-generator-core": "latest",
+    "@azure-tools/typespec-csharp": "^0.2.0-beta.20230515.1",
+    "@azure-tools/typespec-java": "^0.7.0",
+    "@azure-tools/typespec-python": "^0.8.6",
     "@typespec/compiler": "latest",
+    "@typespec/http": "latest",
     "@typespec/openapi": "latest",
     "@typespec/openapi3": "latest",
     "@typespec/prettier-plugin-typespec": "latest",
     "@typespec/rest": "latest",
-    "@typespec/http": "latest",
     "prettier": "latest"
   },
   "private": true

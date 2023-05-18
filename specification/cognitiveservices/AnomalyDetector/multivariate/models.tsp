@@ -105,10 +105,10 @@ model VariableState {
   effectiveCount?: int32;
 
   @doc("First valid timestamp with value of input data.")
-  firstTimestamp?: zonedDateTime;
+  firstTimestamp?: utcDateTime;
 
   @doc("Last valid timestamp with value of input data.")
-  lastTimestamp?: zonedDateTime;
+  lastTimestamp?: utcDateTime;
 }
 
 @doc("""

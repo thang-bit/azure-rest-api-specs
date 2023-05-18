@@ -1,4 +1,5 @@
 import "@typespec/rest";
+import "@typespec/openapi3";
 using TypeSpec.Http;
 
 @useAuth(azure_auth<[ImplicitFlow]>)
@@ -7,10 +8,13 @@ using TypeSpec.Http;
     version: "2023-03-01-preview",
 })
 @server(
-    "https://{region}.easm.defender.microsoft.com",
+    "{endpoint}",
     "",
     {
-        region?: string = "eastus",
+        @doc("""
+    Supported Defender EASM endpoints (for example: https://east.easm.defender.microsoft.com)
+""")
+        endpoint: string,
     }
 )
 @doc("Defender EASM discovers and maps your digital attack surface to provide an \"outside-in\" perspective using probes to discover assets. The assets are provided with detailed metadata associated, including vulnerabilities, configurations and web components, allowing customers to view and prioritize external risk. The EASM REST API enables you to develop clients that integrate with your application.")
